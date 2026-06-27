@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://popmyvideo.com/sitemap.xml
+Sitemap: https://popmyvideo.com/sitemap-index.xml

@@ -1,0 +1,127 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import BaseLayout from './BaseLayout.astro';
+import FormattedDate from '../components/FormattedDate.astro';
+import { PLAY_STORE_URL, APP_NAME, STUDIO_NAME, SITE_URL } from '../consts';
+
+type Props = CollectionEntry<'blog'>['data'] & {
+	readingTime?: number;
+};
+
+const { title, description, pubDate, updatedDate, heroImage, tags, readingTime } = Astro.props;
+
+const siteUrl = SITE_URL;
+const canonicalPath = Astro.url.pathname;
+
+const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": title,
+    "description": description,
+    "datePublished": pubDate.toISOString(),
+    ...(updatedDate ? { "dateModified": updatedDate.toISOString() } : {}),
+    "image": heroImage ? new URL(heroImage, siteUrl).href : undefined,
+    "url": new URL(canonicalPath, siteUrl).href,
+    "author": {
+        "@type": "Organization",
+        "name": STUDIO_NAME,
+        "url": siteUrl
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": STUDIO_NAME,
+        "url": siteUrl
+    },
+    ...(tags?.length ? { "keywords": tags.join(", ") } : {})
+};
+---
+
+<BaseLayout
+    title={`${title} | ${STUDIO_NAME} Blog`}
+    description={description}
+    image={heroImage}
+    keywords={tags?.join(", ")}
+>
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+
+	<main class="max-w-4xl mx-auto px-6 py-12 md:py-24 relative z-10">
+		<article class="fade-up">
+			<header class="mb-12 md:mb-20 text-center">
+				<div class="flex items-center justify-center gap-4 mb-6 flex-wrap">
+					<p class="text-[10px] uppercase tracking-[0.2em] font-black text-[var(--accent-warm)]">
+						<FormattedDate date={pubDate} />
+					</p>
+					{
+						readingTime && (
+							<>
+								<span class="w-1 h-1 bg-[var(--border-subtle)] rounded-full"></span>
+								<p class="text-[10px] uppercase tracking-[0.2em] font-black text-[var(--text-muted)]">
+									{readingTime} min read
+								</p>
+							</>
+						)
+					}
+					{
+						updatedDate && (
+							<span class="text-[10px] uppercase tracking-[0.2em] font-black text-[var(--text-muted)] italic">
+								(Updated <FormattedDate date={updatedDate} />)
+							</span>
+						)
+					}
+				</div>
+				
+				<h1 class="serif text-4xl md:text-6xl lg:text-7xl leading-tight text-[var(--text-main)] mb-8">
+					{title}
+				</h1>
+
+				{heroImage && (
+					<div class="aspect-[21/9] w-full overflow-hidden rounded-[32px] md:rounded-[48px] app-shadow border border-[var(--border-subtle)]">
+						<img src={heroImage} alt={title} class="w-full h-full object-cover" />
+					</div>
+				)}
+			</header>
+
+			<div class="prose max-w-none">
+				<slot />
+			</div>
+
+			<footer class="mt-24 pt-12 border-t border-[var(--border-subtle)] flex flex-col md:flex-row items-center justify-between gap-8">
+				<div class="flex items-center gap-4">
+					<div class="w-12 h-12 rounded-full flex items-center justify-center overflow-hidden border border-[var(--border-subtle)]">
+						<img src="/logo.png" alt={STUDIO_NAME} class="w-8 h-8 object-contain" />
+					</div>
+					<div>
+						<p class="text-[10px] uppercase tracking-widest font-black text-[var(--text-muted)]">Written by</p>
+						<p class="font-bold text-[var(--text-main)]">{STUDIO_NAME} Team</p>
+					</div>
+				</div>
+				
+				<a 
+					href="/blog/" 
+					class="text-[10px] uppercase tracking-widest font-black flex items-center gap-2 text-[var(--text-muted)] hover:text-[var(--accent-cool)] hover:gap-4 transition-all"
+				>
+					<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M7 16l-4-4m0 0l4-4m-4 4h18"/>
+					</svg>
+					Back to Articles
+				</a>
+			</footer>
+		</article>
+
+		<section class="mt-32 glass-card p-10 md:p-16 text-center relative overflow-hidden">
+			<div class="absolute top-0 right-0 w-64 h-64 bg-[var(--accent-warm)]/10 blur-[100px] -translate-y-1/2 translate-x-1/2"></div>
+			<div class="relative z-10">
+				<h2 class="serif text-4xl mb-6 text-[var(--text-main)]">Try it on your next <span class="italic gradient-text">clip</span>.</h2>
+				<p class="text-[var(--text-muted)] mb-10 max-w-md mx-auto">Drop your video, add captions and effects — {APP_NAME} on Android now.</p>
+				<a
+					href={PLAY_STORE_URL}
+					target="_blank"
+					rel="noopener noreferrer"
+					class="inline-block cta-primary font-black px-8 py-4 rounded-2xl text-[10px] uppercase tracking-widest"
+				>
+					Download on Google Play
+				</a>
+			</div>
+		</section>
+	</main>
+</BaseLayout>

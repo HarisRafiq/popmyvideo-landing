@@ -1,0 +1,234 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import IosWaitlistForm from '../components/IosWaitlistForm.astro';
+import { isPublished, postSlug } from '../lib/blog';
+import { PLAY_STORE_URL, APP_NAME, STUDIO_NAME, PRODUCT_LOGO, SITE_DESCRIPTION, SITE_URL } from '../consts';
+
+const siteUrl = SITE_URL;
+const screenshotDims = { width: 1290, height: 2796 };
+
+const latestPost = (await getCollection('blog'))
+	.filter(isPublished)
+	.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())[0];
+
+const features = [
+	{
+		title: 'Auto captions',
+		body: 'Animated hooks and callouts land on beat — no timeline scrubbing.',
+	},
+	{
+		title: 'Timed effects',
+		body: 'Arrows, sparks, confetti — synced to what happens in your clip.',
+	},
+	{
+		title: 'Minutes, not hours',
+		body: 'Import, prompt the vibe, export. CapCut polish without the grind.',
+	},
+];
+
+const steps = [
+	{ n: '1', title: 'Drop your clip', image: '/screenshots/home.png' },
+	{ n: '2', title: 'Pick a vibe', image: '/screenshots/prompt-versions.png' },
+	{ n: '3', title: 'Export & post', image: '/screenshots/export.png' },
+];
+
+const jsonLd = {
+	'@context': 'https://schema.org',
+	'@graph': [
+		{
+			'@type': 'WebSite',
+			'@id': `${siteUrl}/#website`,
+			url: siteUrl,
+			name: STUDIO_NAME,
+			description: SITE_DESCRIPTION,
+		},
+		{
+			'@type': 'MobileApplication',
+			name: APP_NAME,
+			applicationCategory: 'MultimediaApplication',
+			operatingSystem: 'Android, iOS',
+			description: 'Turn raw phone clips into scroll-stopping Reels and Shorts with auto captions and AI effects.',
+			url: siteUrl,
+			downloadUrl: PLAY_STORE_URL,
+			installUrl: PLAY_STORE_URL,
+			offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+			creator: { '@type': 'Organization', name: STUDIO_NAME, url: siteUrl },
+		},
+	],
+};
+---
+
+<BaseLayout
+	title={`${STUDIO_NAME} — ${APP_NAME} | Auto Captions & Effects for Reels`}
+	description={SITE_DESCRIPTION}
+	image="/screenshots/ai-polish.png"
+	keywords="ThinkingCats, PopMyVideo, auto captions, video effects, reels, shorts"
+>
+	<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+
+	<main>
+		<!-- Hero: studio + product in one shot -->
+		<section id="popmyvideo" class="relative overflow-hidden">
+			<div class="hero-mesh" aria-hidden="true"></div>
+
+			<div class="relative max-w-6xl mx-auto px-6 pt-12 md:pt-20 pb-20 md:pb-28">
+				<div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+					<!-- Copy -->
+					<div class="fade-up text-center lg:text-left">
+						<div class="flex items-center justify-center lg:justify-start gap-3 mb-8">
+							<div class="logo-halo">
+								<img src="/logo.png" alt={STUDIO_NAME} width="56" height="56" class="w-14 h-14 object-contain" />
+							</div>
+							<div class="text-left">
+								<p class="text-[10px] font-bold tracking-[0.2em] uppercase text-[var(--text-muted)]">{STUDIO_NAME}</p>
+								<div class="product-pill mt-1">
+									<img src={PRODUCT_LOGO} alt="" />
+									<span>{APP_NAME}</span>
+								</div>
+							</div>
+						</div>
+
+						<h1 class="serif text-5xl sm:text-6xl lg:text-[4.25rem] leading-[1.05] tracking-tight text-[var(--text-main)] mb-5">
+							Think less.<br />
+							<span class="italic gradient-text">Pop more.</span>
+						</h1>
+
+						<p class="text-[var(--text-muted)] text-lg leading-relaxed max-w-md mx-auto lg:mx-0 mb-8">
+							Raw clips in. Polished Reels out. Auto captions, motion graphics, and AI effects — timed to your footage, on your phone.
+						</p>
+
+						<div id="download" class="flex flex-col sm:flex-row gap-3 mb-4 max-w-md mx-auto lg:mx-0">
+							<a
+								href={PLAY_STORE_URL}
+								target="_blank"
+								rel="noopener noreferrer"
+								class="inline-flex items-center justify-center gap-2.5 cta-primary font-bold px-7 py-4 rounded-xl text-[11px] uppercase tracking-[0.15em] cta-glow"
+							>
+								<svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+									<path d="M3.609 1.814L13.792 12 3.61 22.186a1.003 1.003 0 0 1-.61-.92V2.734a1.003 1.003 0 0 1 .609-.92zm9.804 8.983l2.109 2.109-9.458 5.498 7.349-7.607zm2.109-2.109l2.108 2.109 2.553-1.486-2.108-2.109-2.553 1.486zm0 4.218l-2.109 2.109 2.553 1.486 2.109-2.109-2.553-1.486zM5.116 20.814l9.458-5.498-2.109-2.109-7.349 7.607z"/>
+								</svg>
+								Google Play
+							</a>
+							<IosWaitlistForm variant="hero" />
+						</div>
+						<p class="text-[10px] font-bold text-[var(--text-muted)] uppercase tracking-widest">
+							Android live · Video stays on your phone
+						</p>
+					</div>
+
+					<!-- Phones: before / after -->
+					<div class="fade-up flex justify-center lg:justify-end" style="animation-delay: 0.1s">
+						<div class="phone-showcase pt-8">
+							<div class="phone-showcase__item phone-showcase__item--before">
+								<span class="phone-showcase__label text-[var(--accent-warm)]">You shoot</span>
+								<div class="phone-frame">
+									<div class="phone-frame__inner">
+										<img
+											src="/screenshots/you-shoot.png"
+											alt="Raw clip before effects"
+											width={screenshotDims.width}
+											height={screenshotDims.height}
+											loading="eager"
+											fetchpriority="high"
+										/>
+									</div>
+								</div>
+							</div>
+							<div class="phone-showcase__item phone-showcase__item--after">
+								<span class="phone-showcase__label text-[var(--accent-cool)]">We pop</span>
+								<div class="phone-frame">
+									<div class="phone-frame__inner">
+										<img
+											src="/screenshots/ai-polish.png"
+											alt="Polished clip with effects"
+											width={screenshotDims.width}
+											height={screenshotDims.height}
+											loading="eager"
+										/>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Features -->
+		<section class="border-t border-[var(--border-subtle)]">
+			<div class="max-w-6xl mx-auto px-6 py-16 md:py-20">
+				<div class="grid md:grid-cols-3 gap-6">
+					{
+						features.map((f, i) => (
+							<article class="feature-card fade-up" style={`animation-delay: ${i * 0.08}s`}>
+								<h3 class="text-base font-bold text-[var(--text-main)] mb-2">{f.title}</h3>
+								<p class="text-sm text-[var(--text-muted)] leading-relaxed m-0">{f.body}</p>
+							</article>
+						))
+					}
+				</div>
+				<p class="text-center text-sm text-[var(--text-muted)] mt-10 max-w-xl mx-auto">
+					Your original footage stays intact — we layer polish on top, not AI-regenerated video.
+				</p>
+			</div>
+		</section>
+
+		<!-- How it works -->
+		<section class="border-t border-[var(--border-subtle)] bg-[var(--studio-bg-mid)]">
+			<div class="max-w-6xl mx-auto px-6 py-16 md:py-24">
+				<h2 class="serif text-3xl md:text-4xl text-center text-[var(--text-main)] mb-12 md:mb-16">
+					Three taps, <span class="italic text-[var(--text-muted)]">not three hours</span>
+				</h2>
+				<div class="grid md:grid-cols-3 gap-10 md:gap-8">
+					{
+						steps.map((step, i) => (
+							<div class="step-card fade-up" style={`animation-delay: ${i * 0.1}s`}>
+								<span class="step-card__num">{step.n}</span>
+								<div class="step-card__phone phone-frame">
+									<div class="phone-frame__inner">
+										<img src={step.image} alt={step.title} width={screenshotDims.width} height={screenshotDims.height} loading="lazy" />
+									</div>
+								</div>
+								<h3 class="font-bold text-[var(--text-main)]">{step.title}</h3>
+							</div>
+						))
+					}
+				</div>
+			</div>
+		</section>
+
+		<!-- Bottom bar: privacy + blog -->
+		<section class="border-t border-[var(--border-subtle)]">
+			<div class="max-w-6xl mx-auto px-6 py-12 md:py-16">
+				<div class="flex flex-col md:flex-row md:items-center md:justify-between gap-8">
+					<div class="flex items-start gap-4 max-w-md">
+						<div class="shrink-0 w-10 h-10 rounded-xl bg-emerald-500/10 flex items-center justify-center text-emerald-400">
+							<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+							</svg>
+						</div>
+						<div>
+							<p class="font-bold text-[var(--text-main)] text-sm mb-1">Privacy by design</p>
+							<p class="text-sm text-[var(--text-muted)] leading-relaxed m-0">Full video stays on device. Only compressed frames sent for AI — deleted after processing.</p>
+						</div>
+					</div>
+
+					{
+						latestPost && (
+							<a href={`/blog/${postSlug(latestPost.id)}/`} class="group glass-card px-5 py-4 flex items-center gap-4 max-w-sm hover:border-white/15 transition-colors">
+								<div class="w-12 h-12 rounded-lg overflow-hidden shrink-0">
+									<img src={latestPost.data.heroImage} alt="" class="w-full h-full object-cover" />
+								</div>
+								<div class="min-w-0">
+									<p class="text-[9px] font-bold uppercase tracking-widest text-[var(--accent-cool)] mb-1">Latest from {STUDIO_NAME}</p>
+									<p class="text-sm font-semibold text-[var(--text-main)] truncate group-hover:text-[var(--accent-cool)] transition-colors">{latestPost.data.title}</p>
+								</div>
+							</a>
+						)
+					}
+				</div>
+			</div>
+		</section>
+	</main>
+</BaseLayout>

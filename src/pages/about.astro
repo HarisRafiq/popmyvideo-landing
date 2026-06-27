@@ -1,0 +1,70 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { PLAY_STORE_URL, APP_NAME, STUDIO_NAME } from '../consts';
+---
+
+<BaseLayout
+	title={`About ${STUDIO_NAME} — Mobile Studio for Creators`}
+	description={`${STUDIO_NAME} builds mobile tools for creators. ${APP_NAME} layers animated text, icons, and effects on top of your footage — timed to the action. Android live; iOS waitlist open.`}
+	keywords={`ThinkingCats, PopMyVideo, AI video effects, auto captions, mobile video editor, Cats Build Ltd`}
+>
+	<main class="max-w-3xl mx-auto px-6 py-12 md:py-24 relative z-10">
+		<header class="mb-12 md:mb-16 fade-up">
+			<p class="text-[var(--accent-warm)] uppercase tracking-[0.4em] text-[10px] md:text-[11px] font-black mb-4">
+				About {STUDIO_NAME}
+			</p>
+			<h1 class="serif text-4xl md:text-6xl text-[var(--text-main)] mb-6 leading-tight">
+				We think in motion.<br />
+				<span class="italic text-[var(--text-muted)]">You create the footage.</span>
+			</h1>
+			<p class="text-[var(--text-muted)] text-lg md:text-xl leading-relaxed">
+				{STUDIO_NAME} is a mobile studio from Cats Build Ltd. We build apps that read your footage and add the polish humans shouldn't have to place frame by frame.
+			</p>
+		</header>
+
+		<div class="prose max-w-none fade-up space-y-6 text-[var(--text-muted)] leading-relaxed">
+			<p>
+				Our first app, <strong class="text-[var(--text-main)]">{APP_NAME}</strong>, turns raw phone clips into scroll-stopping Reels and Shorts. Upload any clip and AI layers animated text, icons, shapes, and effects on top — timed to what's happening in your footage.
+			</p>
+
+			<p>
+				Most phone footage looks fine — but fine doesn't stop the scroll. We built {APP_NAME} for creators who want their clips to look finished without spending hours in an editor: auto captions, arrows, sparkle when something lands, and sound effects when the clip needs punch.
+			</p>
+
+			<p>
+				AI reads your shot (and listens if there's audio), finds the right moments, and adds moving graphics on top. Your original video is never remade — we don't restyle or regenerate your pixels. You import, prompt the vibe, preview, and export a polished MP4 from your phone.
+			</p>
+
+			<h2 class="serif text-2xl md:text-3xl text-[var(--text-main)] !mt-12 !mb-4">Privacy by design</h2>
+			<p>
+				Your full video file stays on your device. To generate effects, we send compressed storyboard frames and audio from the selected section — not your entire library. Processing data is deleted after the job completes.
+			</p>
+
+			<h2 class="serif text-2xl md:text-3xl text-[var(--text-main)] !mt-12 !mb-4">Where we are today</h2>
+			<p>
+				{APP_NAME} is live on Android. iOS is in development — <a href="/#ios-waitlist">join the waitlist</a> to get notified at launch. {STUDIO_NAME} publishes practical guides on our <a href="/blog/">blog</a> for creators who want Reels and short-form video to stand out without a steep learning curve.
+			</p>
+		</div>
+
+		<section class="mt-16 glass-card p-10 md:p-12 text-center">
+			<h2 class="serif text-3xl mb-4 text-[var(--text-main)]">Try {APP_NAME} on your next clip</h2>
+			<p class="text-[var(--text-muted)] mb-8 max-w-md mx-auto">Download on Android or join the iOS waitlist — polish a clip in minutes, not hours.</p>
+			<div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+				<a
+					href={PLAY_STORE_URL}
+					target="_blank"
+					rel="noopener noreferrer"
+					class="inline-block cta-primary font-black px-8 py-4 rounded-2xl text-[10px] uppercase tracking-widest"
+				>
+					Download on Google Play
+				</a>
+				<a
+					href="/#ios-waitlist"
+					class="inline-block border border-[var(--border-subtle)] text-[var(--text-main)] font-black px-8 py-4 rounded-2xl text-[10px] uppercase tracking-widest hover:bg-white/5 transition-colors"
+				>
+					Join iOS waitlist
+				</a>
+			</div>
+		</section>
+	</main>
+</BaseLayout>

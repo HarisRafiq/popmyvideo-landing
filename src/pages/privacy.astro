@@ -1,0 +1,208 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { APP_NAME, DEVELOPER_NAME, ANDROID_PACKAGE_ID, IOS_BUNDLE_ID } from '../consts';
+---
+
+<BaseLayout title={`Privacy Policy — ${APP_NAME}`} description={`How ${DEVELOPER_NAME} collects, uses, and protects your information when you use ${APP_NAME} on Android and iOS.`}>
+	<main class="compliance-main">
+		<div class="compliance-panel">
+
+			<a href="/" class="back-link">
+				<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+				<span>Back to Home</span>
+			</a>
+
+			<div class="page-header">
+				<div class="icon-badge icon-badge--indigo">
+					<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon--indigo"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+				</div>
+				<h1 class="serif">Privacy Policy</h1>
+			</div>
+
+			<div class="prose-body prose">
+
+				<p class="last-updated"><strong>Last updated:</strong> June 26, 2026</p>
+
+				<section>
+					<p><strong>Cats Build Ltd</strong> trading as <strong>{DEVELOPER_NAME}</strong> ("we", "us", "our") publishes <strong>{APP_NAME}</strong>, a mobile video editing app that helps you turn raw clips into a finished cut by adding visual and sound effects. This policy describes how we collect, use, and protect your information when you use {APP_NAME} on <strong>Android</strong> (<code>{ANDROID_PACKAGE_ID}</code>) or <strong>iOS</strong> (<code>{IOS_BUNDLE_ID}</code>).</p>
+					<p>By using {APP_NAME}, you agree to this policy and our <a href="/terms/">Terms of Use (EULA)</a>. If you do not agree, please do not use the app.</p>
+				</section>
+
+				<section>
+					<h2>Information we collect</h2>
+
+					<h3>Account information</h3>
+					<p>When you create an account, we collect:</p>
+					<ul>
+						<li>Email address</li>
+						<li>A unique user identifier</li>
+						<li>Authentication credentials (stored securely by our auth provider; we do not store your password in plain text)</li>
+					</ul>
+					<p>Account sign-in is provided by <strong>Supabase</strong>.</p>
+
+					<h3>User content</h3>
+					<p>When you use the app, you may provide:</p>
+					<ul>
+						<li>Video clips stored on your device</li>
+						<li>Project metadata (timeline structure, effect settings, project names)</li>
+						<li>Exported videos you choose to save or share</li>
+					</ul>
+					<p>Video files and project timelines remain on your device. We do not store your video library or editor projects on our servers.</p>
+
+					<h3>Cloud AI processing</h3>
+					<p>When you use AI features (shot analysis, visual effects generation, sound effects generation), portions of your video or derived frames may be sent to our <strong>Intelligence API</strong> and processed by third-party AI providers, including:</p>
+					<ul>
+						<li><strong>Google Gemini</strong> (shot analysis and effect generation)</li>
+						<li><strong>fal.ai</strong> (media generation where applicable)</li>
+					</ul>
+					<p>We send only what is needed to perform the requested feature. Your full video file stays on your device; we send compressed storyboard frames and audio from the selected window — not your entire library. Reference frames derived from your video are deleted after processing. We do not use your content to train public AI models on your behalf.</p>
+					<p>We may retain <strong>de-identified</strong> prompts, analysis text, and generated effect outputs in a shared technical cache to improve reliability and reduce processing cost. This cache is not linked to your account after you delete your account.</p>
+
+					<h3>Purchase information</h3>
+					<p>If you subscribe to Creator or Pro, payment is processed by the store where you subscribed:</p>
+					<ul>
+						<li><strong>Android:</strong> Google Play Billing</li>
+						<li><strong>iOS:</strong> Apple App Store in-app purchases</li>
+					</ul>
+					<p>We receive subscription status through <strong>RevenueCat</strong> (entitlement and renewal state tied to your account). We do not receive or store your full payment card number.</p>
+					<p>Subscriptions are auto-renewing. Billing, renewal timing, cancellation, free-trial terms, and refunds are governed by the store where you subscribed and are described in our <a href="/terms/#subscriptions">Terms of Use (EULA)</a>.</p>
+
+					<h3>Usage data</h3>
+					<p>We record usage events to enforce monthly effect allowances and improve reliability, including:</p>
+					<ul>
+						<li>Feature type (e.g. VFX, SFX, shot analysis)</li>
+						<li>Timestamps and quota debits</li>
+						<li>Error and job status for generation requests</li>
+					</ul>
+					<p>We do <strong>not</strong> use this data for advertising. We do not sell your personal information.</p>
+				</section>
+
+				<section>
+					<h2>How we use information</h2>
+					<p>We use your information to:</p>
+					<ul>
+						<li>Authenticate you and sync projects across devices</li>
+						<li>Process AI features you request (VFX, SFX, shot analysis)</li>
+						<li>Enforce subscription plans and monthly effect limits</li>
+						<li>Process subscriptions and restore purchases</li>
+						<li>Maintain security, prevent abuse, and fix bugs</li>
+						<li>Comply with legal obligations</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>How we share information</h2>
+					<p>We share information only with service providers that help us operate the app:</p>
+					<div class="table-wrap">
+						<table>
+							<thead>
+								<tr>
+									<th>Provider</th>
+									<th>Purpose</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr><td>Supabase</td><td>Authentication, database, project sync</td></tr>
+								<tr><td>Google Cloud Run</td><td>Hosting our Intelligence API</td></tr>
+								<tr><td>Google Gemini</td><td>AI analysis and generation</td></tr>
+								<tr><td>fal.ai</td><td>Media generation</td></tr>
+								<tr><td>RevenueCat</td><td>Subscription management</td></tr>
+								<tr><td>Google Play</td><td>Billing and subscription fulfillment (Android)</td></tr>
+								<tr><td>Apple App Store</td><td>Billing and subscription fulfillment (iOS)</td></tr>
+							</tbody>
+						</table>
+					</div>
+					<p>We may also disclose information if required by law or to protect our rights, users, or safety.</p>
+					<p>We do not sell your personal information to third parties.</p>
+				</section>
+
+				<section>
+					<h2>Data retention</h2>
+					<ul>
+						<li><strong>Account data</strong> (email, user id, subscription state) is retained while your account is active.</li>
+						<li><strong>AI pipeline data</strong> tied to your account (generation jobs, shot analyses) is retained while your account is active.</li>
+						<li><strong>Reference images</strong> from your video are deleted after each AI generation completes.</li>
+						<li><strong>De-identified generation cache</strong> (prompts, analysis text, effect outputs without your user id) may be retained after account deletion to operate and improve the service.</li>
+						<li><strong>Usage and billing records</strong> are retained as needed for quota enforcement and legal compliance while your account is active.</li>
+						<li><strong>Video and projects on device</strong> remain under your control; uninstalling the app removes local app data.</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Your choices and rights</h2>
+					<p>Depending on your location, you may have the right to:</p>
+					<ul>
+						<li>Access the personal information we hold about you</li>
+						<li>Correct inaccurate information</li>
+						<li>Request deletion of your account and associated data</li>
+						<li>Withdraw consent where processing is based on consent</li>
+					</ul>
+					<p><strong>Delete your account in the app:</strong> Account → <strong>Delete account &amp; data</strong>. This removes your account, billing linkage, usage history, user-scoped AI data, and reference images from our servers. Local projects on your device are also cleared.</p>
+					<p>You can also contact us at the email below for access or deletion requests (for example if you cannot sign in).</p>
+					<p>You can cancel subscriptions anytime in <strong>Google Play → Subscriptions</strong> (Android) or <strong>Settings → Apple ID → Subscriptions</strong> (iOS). Account deletion does not cancel store billing. See our <a href="/terms/#subscriptions">Terms of Use</a> for full subscription terms.</p>
+				</section>
+
+				<section>
+					<h2>Children's privacy</h2>
+					<p>{APP_NAME} is not directed at children under 13 (or the minimum age required in your country). We do not knowingly collect personal information from children. If you believe a child has provided us information, contact us and we will delete it.</p>
+				</section>
+
+				<section>
+					<h2>Security</h2>
+					<p>We use industry-standard measures including encryption in transit (HTTPS/TLS) for data sent to our servers. No method of transmission or storage is 100% secure; we cannot guarantee absolute security.</p>
+				</section>
+
+				<section>
+					<h2>International transfers</h2>
+					<p>Your information may be processed in the United States and other countries where our service providers operate. By using the app, you consent to such transfers subject to applicable law.</p>
+				</section>
+
+				<section>
+					<h2>Changes to this policy</h2>
+					<p>We may update this policy from time to time. We will post the updated version with a new "Last updated" date. Continued use of the app after changes constitutes acceptance of the updated policy.</p>
+				</section>
+
+				<section>
+					<h2>Contact us</h2>
+					<p>For privacy questions or data requests, contact:</p>
+					<p><strong>Cats Build Ltd</strong> (trading as {DEVELOPER_NAME})</p>
+					<p>
+						Office 17907, 182–184 High Street North,<br />
+						East Ham, London, United Kingdom, E6 2JA
+					</p>
+					<p><strong>Email:</strong> <a href="mailto:support@thinkingcats.com">support@thinkingcats.com</a></p>
+					<p><strong>Terms of Use:</strong> <a href="/terms/">popmyvideo.com/terms</a></p>
+					<p><strong>App:</strong> {APP_NAME}</p>
+					<p><strong>Android:</strong> <code>{ANDROID_PACKAGE_ID}</code></p>
+					<p><strong>iOS:</strong> <code>{IOS_BUNDLE_ID}</code></p>
+				</section>
+
+				<section>
+					<h2>Store privacy disclosures</h2>
+
+					<h3>Google Play (Android)</h3>
+					<p>When completing the Play Console Data safety form, declare approximately:</p>
+					<ul>
+						<li><strong>Data collected:</strong> Email, user IDs, app interactions, user-generated content (video sent for processing), purchase history (via Play/RevenueCat)</li>
+						<li><strong>Data shared:</strong> With service providers listed above</li>
+						<li><strong>Purpose:</strong> App functionality, account management, fraud prevention, analytics (quota metering only)</li>
+						<li><strong>Optional vs required:</strong> Account required for cloud sync and AI features; media access required for editing</li>
+						<li><strong>Encryption:</strong> Data encrypted in transit</li>
+						<li><strong>Deletion:</strong> In-app Account → Delete account &amp; data; email fallback for locked-out users</li>
+					</ul>
+
+					<h3>Apple App Store (iOS)</h3>
+					<p>When completing App Store Connect privacy labels, declare approximately:</p>
+					<ul>
+						<li><strong>Data linked to you:</strong> Email, user ID, purchase history, product interaction (quota and feature usage)</li>
+						<li><strong>Data used for tracking:</strong> None — we do not use your data for advertising or cross-app tracking</li>
+						<li><strong>Purpose:</strong> App functionality, account management, subscription fulfillment</li>
+						<li><strong>Third-party SDKs:</strong> Supabase, RevenueCat, and AI providers listed above</li>
+						<li><strong>Deletion:</strong> In-app Account → Delete account &amp; data; email fallback for locked-out users</li>
+					</ul>
+				</section>
+
+			</div>
+		</div>
+	</main>
+</BaseLayout>

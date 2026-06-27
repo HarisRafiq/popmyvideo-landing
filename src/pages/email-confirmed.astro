@@ -1,0 +1,169 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { APP_NAME, PLAY_STORE_URL, APP_LAUNCH_INTENT_URL } from '../consts';
+
+const steps = [
+	{
+		number: '01',
+		title: `Open ${APP_NAME}`,
+		body: "Tap the button below on the same phone where you installed the app. We'll launch it — or send you to Google Play if you still need to install.",
+	},
+	{
+		number: '02',
+		title: 'Sign in again',
+		body: 'Use the same email and password you just verified. Your account is active — signing in picks up right where you left off.',
+	},
+	{
+		number: '03',
+		title: 'Finish onboarding',
+		body: 'Complete the quick VFX & SFX setup in the app so the director knows how you like to enhance your clips.',
+	},
+];
+---
+
+<BaseLayout
+	title={`Email confirmed — ${APP_NAME}`}
+	description={`Your ${APP_NAME} email is verified. Open the app, sign in, and finish onboarding to start enhancing your videos.`}
+	robots="noindex, follow"
+>
+	<main class="min-h-[80vh] relative overflow-hidden pb-24 md:pb-32 z-10">
+		<div class="absolute top-1/4 -left-24 w-72 h-72 bg-[var(--accent-warm)]/15 rounded-full blur-[100px] pointer-events-none"></div>
+		<div class="absolute bottom-1/3 -right-24 w-96 h-96 bg-[var(--accent-purple)]/10 rounded-full blur-[120px] pointer-events-none"></div>
+		<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[min(90vw,520px)] h-[min(90vw,520px)] bg-[var(--accent-cool)]/5 rounded-full blur-[80px] pointer-events-none"></div>
+
+		<section class="relative z-10 max-w-6xl mx-auto px-6 pt-4 md:pt-8">
+			<div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+				<div class="text-center lg:text-left fade-up">
+					<div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-[10px] font-black uppercase tracking-[0.25em] mb-6 md:mb-8">
+						<svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/>
+						</svg>
+						Email verified
+					</div>
+
+					<h1 class="serif text-4xl sm:text-5xl md:text-6xl lg:text-[3.5rem] text-[var(--text-main)] mb-5 leading-[1.08] tracking-tight">
+						You're in.<br />
+						<span class="italic text-[var(--text-muted)]">One more step.</span>
+					</h1>
+
+					<p class="text-[var(--text-muted)] text-base md:text-lg leading-relaxed max-w-xl mx-auto lg:mx-0 mb-8">
+						Thanks for confirming your email — we really appreciate you joining {APP_NAME}.
+						<span class="text-[var(--text-main)] font-semibold"> Head back to the app</span> to sign in and wrap up onboarding so you can start enhancing your clips.
+					</p>
+
+					<div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-center lg:justify-start gap-4 mb-6">
+						<a
+							id="open-app"
+							href={APP_LAUNCH_INTENT_URL}
+							data-play-store={PLAY_STORE_URL}
+							class="inline-flex items-center justify-center gap-3 cta-primary font-black px-8 py-4 rounded-2xl active:scale-[0.98] text-[10px] uppercase tracking-[0.2em] cta-glow w-full sm:w-auto"
+						>
+							<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/>
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+							</svg>
+							Open {APP_NAME}
+						</a>
+						<a
+							href={PLAY_STORE_URL}
+							target="_blank"
+							rel="noopener noreferrer"
+							class="inline-flex items-center justify-center gap-2 px-6 py-4 rounded-2xl border border-[var(--border-subtle)] text-[var(--text-muted)] font-black text-[10px] uppercase tracking-[0.2em] hover:bg-white/5 transition-colors w-full sm:w-auto"
+						>
+							Get it on Google Play
+						</a>
+					</div>
+
+					<p class="text-[9px] md:text-[10px] font-black text-[var(--text-muted)] uppercase tracking-widest max-w-md mx-auto lg:mx-0">
+						On desktop? Open this page on your Android phone, or install from Google Play first.
+					</p>
+				</div>
+
+				<div class="fade-up flex justify-center lg:justify-end" style="animation-delay: 0.12s">
+					<div class="phone-frame w-[min(100%,280px)] sm:w-[300px]">
+						<div class="phone-frame__inner">
+							<img
+								src="/screenshots/home.png"
+								alt={`${APP_NAME} home screen — drop your video, AI adds the polish`}
+								width="1290"
+								height="2796"
+								loading="eager"
+							/>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section class="relative z-10 max-w-3xl mx-auto px-6 mt-20 md:mt-28 fade-up" style="animation-delay: 0.2s" aria-label="Next steps">
+			<p class="text-center text-[var(--accent-cool)] uppercase tracking-[0.35em] text-[10px] font-black mb-4">What's next</p>
+			<h2 class="serif text-3xl md:text-4xl text-[var(--text-main)] text-center mb-10 md:mb-14">
+				Finish setup in <span class="italic text-[var(--text-muted)]">under a minute</span>
+			</h2>
+
+			<ol class="space-y-5">
+				{
+					steps.map((step) => (
+						<li class="confirm-step">
+							<span class="confirm-step__num" aria-hidden="true">{step.number}</span>
+							<div>
+								<h3 class="text-lg font-black text-[var(--text-main)] mb-1.5">{step.title}</h3>
+								<p class="text-[var(--text-muted)] text-sm md:text-base leading-relaxed m-0">{step.body}</p>
+							</div>
+						</li>
+					))
+				}
+			</ol>
+
+			<div class="mt-12 text-center">
+				<a
+					href={APP_LAUNCH_INTENT_URL}
+					class="inline-flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.2em] text-[var(--accent-cool)] hover:text-[var(--accent-warm)] transition-colors"
+				>
+					Open the app again
+					<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+					</svg>
+				</a>
+			</div>
+		</section>
+
+		<section class="relative z-10 max-w-xl mx-auto px-6 mt-16 md:mt-20 fade-up" style="animation-delay: 0.28s">
+			<div class="glass-card p-6 md:p-8 text-center">
+				<p class="text-[var(--text-muted)] text-sm leading-relaxed m-0">
+					Trouble signing in after verifying?
+					<a href="mailto:support@thinkingcats.com" class="text-[var(--text-main)] font-semibold hover:text-[var(--accent-cool)] transition-colors">support@thinkingcats.com</a>
+				</p>
+			</div>
+		</section>
+	</main>
+</BaseLayout>
+
+<style>
+	.confirm-step {
+		display: flex;
+		gap: 1.25rem;
+		align-items: flex-start;
+		padding: 1.5rem 1.5rem 1.5rem 1.25rem;
+		background: rgba(255, 255, 255, 0.03);
+		border: 1px solid var(--border-subtle);
+		border-radius: 1.5rem;
+	}
+	.confirm-step__num {
+		flex-shrink: 0;
+		font-size: 10px;
+		font-weight: 800;
+		letter-spacing: 0.15em;
+		color: var(--text-muted);
+		padding-top: 0.35rem;
+		min-width: 1.75rem;
+	}
+</style>
+
+<script>
+	const openApp = document.getElementById('open-app');
+	if (openApp instanceof HTMLAnchorElement && !/Android/i.test(navigator.userAgent)) {
+		const fallback = openApp.dataset.playStore;
+		if (fallback) openApp.href = fallback;
+	}
+</script>

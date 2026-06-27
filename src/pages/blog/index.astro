@@ -1,0 +1,129 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import FormattedDate from '../../components/FormattedDate.astro';
+import { isPublished, postSlug, readingTimeMinutes } from '../../lib/blog';
+import { PLAY_STORE_URL, APP_NAME, STUDIO_NAME, SITE_URL } from '../../consts';
+
+const posts = (await getCollection('blog'))
+	.filter(isPublished)
+	.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+const siteUrl = SITE_URL;
+const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Blog",
+    "name": `${STUDIO_NAME} Blog`,
+    "description": "Practical guides for making Reels and short-form video pop — captions, effects, and faster workflows.",
+    "url": `${siteUrl}/blog/`,
+    "publisher": {
+        "@type": "Organization",
+        "name": STUDIO_NAME,
+        "url": siteUrl
+    },
+    "blogPost": posts.map(post => ({
+        "@type": "BlogPosting",
+        "headline": post.data.title,
+        "description": post.data.description,
+        "datePublished": post.data.pubDate.toISOString(),
+        "url": `${siteUrl}/blog/${postSlug(post.id)}/`,
+        "image": post.data.heroImage,
+        "author": {
+            "@type": "Organization",
+            "name": STUDIO_NAME
+        }
+    }))
+};
+---
+
+<BaseLayout
+    title={`${STUDIO_NAME} Blog — Reels, Captions & Short-Form Video Tips`}
+    description="Guides for making Instagram Reels and short video pop — auto captions, effects, and faster workflows from ThinkingCats."
+    keywords={`Instagram Reels tips, CapCut alternatives, video effects, auto captions, short-form video, ThinkingCats, PopMyVideo`}
+>
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+	<main class="max-w-7xl mx-auto px-6 py-12 md:py-24 relative z-10">
+		<header class="mb-16 md:mb-24 fade-up">
+			<p class="text-[var(--accent-warm)] uppercase tracking-[0.4em] text-[10px] md:text-[11px] font-black mb-4 md:mb-6">
+				From {STUDIO_NAME}
+			</p>
+			<h1 class="serif text-5xl md:text-7xl lg:text-8xl mb-6 md:mb-8 leading-tight text-[var(--text-main)]">
+				Notes on making<br><span class="italic text-[var(--text-muted)]">clips pop.</span>
+			</h1>
+			<p class="text-[var(--text-muted)] text-lg md:text-xl max-w-2xl leading-relaxed">
+				Workflows, comparisons, and the occasional rant about export queues. Written for people who film on their phone and post the same night.
+			</p>
+		</header>
+
+		{
+			posts.length === 0 ? (
+				<section class="fade-up glass-card p-12 md:p-16 text-center max-w-2xl mx-auto">
+					<p class="text-[var(--text-muted)] text-lg">First post landing soon.</p>
+				</section>
+			) : (
+				<section class="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16">
+					{
+						posts.map((post, index) => (
+							<article class="group fade-up" style={`animation-delay: ${0.1 * (index + 1)}s`}>
+								<a href={`/blog/${postSlug(post.id)}/`} class="block space-y-6">
+									<div class="aspect-[16/9] overflow-hidden rounded-[24px] md:rounded-[40px] app-shadow border border-[var(--border-subtle)] relative transition-transform duration-500 group-hover:scale-[1.02]">
+										<img 
+											src={post.data.heroImage} 
+											alt={post.data.title}
+											class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+										/>
+										<div class="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+									</div>
+									
+									<div class="space-y-4 px-2">
+										<div class="flex items-center gap-4">
+											<p class="text-[10px] uppercase tracking-[0.2em] font-black text-[var(--accent-cool)]">
+												<FormattedDate date={post.data.pubDate} />
+											</p>
+											<span class="w-1 h-1 bg-[var(--border-subtle)] rounded-full"></span>
+											<p class="text-[10px] uppercase tracking-[0.2em] font-black text-[var(--text-muted)]">
+												{readingTimeMinutes(post.body ?? '')} min read
+											</p>
+										</div>
+										
+										<h2 class="serif text-3xl md:text-4xl leading-tight text-[var(--text-main)] group-hover:text-[var(--accent-cool)] transition-colors">
+											{post.data.title}
+										</h2>
+										
+										<p class="text-[var(--text-muted)] line-clamp-2 md:text-lg leading-relaxed">
+											{post.data.description}
+										</p>
+										
+										<div class="pt-2 flex items-center gap-2 text-[var(--text-main)] font-black text-[10px] uppercase tracking-widest group-hover:gap-4 transition-all">
+											Read Article
+											<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+											</svg>
+										</div>
+									</div>
+								</a>
+							</article>
+						))
+					}
+				</section>
+			)
+		}
+
+		<section class="mt-24 md:mt-40 glass-card p-8 md:p-20 text-center fade-up">
+			<h2 class="serif text-4xl md:text-6xl mb-6 text-[var(--text-main)]">
+				Skip the <span class="italic gradient-text">timeline</span>.
+			</h2>
+			<p class="text-[var(--text-muted)] text-lg md:text-xl max-w-xl mx-auto mb-10">
+				{APP_NAME} finds the beat in your footage and layers captions and effects on top. Free on Android.
+			</p>
+			<a 
+				href={PLAY_STORE_URL}
+				target="_blank"
+				rel="noopener noreferrer"
+				class="inline-block cta-primary font-black px-10 py-5 rounded-2xl md:rounded-3xl active:scale-95 text-[10px] uppercase tracking-[0.2em] cta-glow"
+			>
+				Download on Google Play
+			</a>
+		</section>
+	</main>
+</BaseLayout>
