@@ -14,8 +14,10 @@ const today = new Date();
                     Drop your video. Zero edit. More likes. Made by {DEVELOPER_NAME}.
                 </p>
                 <div class="flex items-center gap-2 pt-1">
-                    <img src={DEVELOPER_LOGO} alt={DEVELOPER_NAME} class="h-5 w-5 object-contain opacity-60" />
-                    <span class="text-[10px] font-semibold text-[var(--text-muted)] uppercase tracking-widest">{DEVELOPER_NAME}</span>
+                    <a href="https://thinkingcats.com" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 group">
+                        <img src={DEVELOPER_LOGO} alt={DEVELOPER_NAME} class="h-5 w-5 object-contain opacity-60 group-hover:opacity-100 transition-opacity" />
+                        <span class="text-[10px] font-semibold text-[var(--text-muted)] uppercase tracking-widest group-hover:text-[var(--text-main)] transition-colors">{DEVELOPER_NAME}</span>
+                    </a>
                 </div>
             </div>
 

@@ -1,5 +1,29 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://popmyvideo.com/sitemap.xml
+# Explicit allow for AI/search crawlers (repo source of truth).
+# Cloudflare "Managed robots.txt" prepends Disallow rules at the edge — disable it in
+# Cloudflare → Security → Bots → Manage your robots.txt → "Disable robots.txt configuration",
+# and set "Block AI training bots" → "Do not block (allow crawlers)".
+User-agent: Googlebot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
 Sitemap: https://popmyvideo.com/sitemap-index.xml
