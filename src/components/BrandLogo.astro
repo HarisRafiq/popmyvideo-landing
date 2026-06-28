@@ -1,0 +1,115 @@
+---
+import { APP_NAME, PRODUCT_LOGO } from '../consts';
+
+interface Props {
+	variant?: 'nav' | 'hero' | 'footer' | 'mark';
+	class?: string;
+}
+
+const { variant = 'nav', class: className = '' } = Astro.props;
+
+const markSizes = { nav: 36, hero: 48, footer: 32, mark: 40 };
+const markSize = markSizes[variant];
+---
+
+{
+	variant === 'mark' ? (
+		<img
+			src="/logo-mark.svg"
+			alt=""
+			width={markSize}
+			height={markSize}
+			class:list={['brand-mark', className]}
+		/>
+	) : variant === 'hero' ? (
+		<div class:list={['brand-lockup brand-lockup--hero', className]}>
+			<div class="brand-lockup__icon-wrap">
+				<img src={PRODUCT_LOGO} alt={APP_NAME} width="120" height="120" class="brand-lockup__logo" />
+			</div>
+		</div>
+	) : (
+		<span class:list={['brand-lockup', `brand-lockup--${variant}`, className]}>
+			<img
+				src="/logo-mark.svg"
+				alt=""
+				width={markSize}
+				height={markSize}
+				class="brand-mark"
+			/>
+			<span class="brand-wordmark" aria-label={APP_NAME}>
+				<span class="brand-wordmark__pop">Pop</span><span class="brand-wordmark__my">My</span><span class="brand-wordmark__video">Video</span>
+			</span>
+		</span>
+	)
+}
+
+<style>
+	.brand-lockup {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.625rem;
+	}
+
+	.brand-mark {
+		flex-shrink: 0;
+		display: block;
+	}
+
+	.brand-wordmark {
+		font-family: inherit;
+		font-weight: 800;
+		line-height: 1;
+		letter-spacing: -0.02em;
+		white-space: nowrap;
+	}
+
+	.brand-lockup--nav .brand-wordmark {
+		font-size: 1.125rem;
+	}
+
+	.brand-lockup--footer .brand-wordmark {
+		font-size: 1rem;
+	}
+
+	.brand-wordmark__pop,
+	.brand-wordmark__video {
+		color: var(--text-main);
+	}
+
+	.brand-wordmark__my {
+		color: var(--brand-pink);
+	}
+
+	.brand-lockup--hero {
+		display: block;
+		text-align: center;
+	}
+
+	.brand-lockup__icon-wrap {
+		position: relative;
+		display: inline-block;
+	}
+
+	.brand-lockup__icon-wrap::before {
+		content: '';
+		position: absolute;
+		inset: -25%;
+		background: radial-gradient(
+			circle,
+			rgba(255, 61, 154, 0.25) 0%,
+			rgba(124, 58, 237, 0.12) 40%,
+			rgba(0, 229, 255, 0.06) 60%,
+			transparent 75%
+		);
+		border-radius: 50%;
+		z-index: 0;
+	}
+
+	.brand-lockup__logo {
+		position: relative;
+		z-index: 1;
+		width: 6.5rem;
+		height: auto;
+		object-fit: contain;
+	}
+</style>

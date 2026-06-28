@@ -34,10 +34,9 @@ Mobile app (Android live, iOS waitlist) that analyzes video footage and layers a
 
 | File | Use for |
 |------|---------|
-| `home.png` | Home screen, import starting point, privacy callout |
-| `you-shoot.png` | Raw clip before effects, "YOU SHOOT" overlay, AI analysis |
-| `ai-polish.png` | Finished result with effects, hero/OG image, "after" |
-| `prompt-versions.png` | Version picker, prompting the vibe |
-| `export.png` | Export progress, rendering effects |
+| `step-import.png` | Raw clip / "YOU SHOOT" overlay, import step, "before" |
+| `step-generate.png` | AI VFX generated, "after" / hero / OG image |
+| `step-regenerate.png` | Version picker, regenerate until perfect |
+| `step-export.png` | Export / share ready state |
 
 Dimensions: 1290 × 2796 (iPhone 6.7" App Store captures).

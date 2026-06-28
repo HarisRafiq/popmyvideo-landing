@@ -138,7 +138,7 @@ The downside: you start posting less because the edit becomes the price of entry
 
 Sometimes you don’t need a full edit suite. You need one moment to hit harder so the Reel earns a replay.
 
-That’s where tools like [ThinkingCats](https://popmyvideo.com) make sense — not as “an AI that replaces editing,” but as a way to scan a single-shot clip, find the hook-worthy beats, and add After Effects–style VFX plus cinematic SFX *on the actual motion*.
+That’s where tools like [PopMyVideo](https://popmyvideo.com) make sense — not as “an AI that replaces editing,” but as a way to scan a single-shot clip, find the hook-worthy beats, and add After Effects–style VFX plus cinematic SFX *on the actual motion*.
 
 It’s especially useful for:
 
@@ -150,11 +150,11 @@ You still might trim in CapCut. You still might caption in CapCut. The point is 
 
 <div class="before-after">
   <figure>
-    <img src="/screenshots/you-shoot.png" alt="A raw clip in ThinkingCats before any polish is applied" width="1290" height="2796" loading="lazy" />
+    <img src="/screenshots/step-import.png" alt="A raw clip in PopMyVideo before any polish is applied" width="468" height="1024" loading="lazy" />
     <figcaption>Before — clean footage, no accent on the hit</figcaption>
   </figure>
   <figure>
-    <img src="/screenshots/ai-polish.png" alt="The same clip with AI-timed text and VFX on the hero moment" width="1290" height="2796" loading="lazy" />
+    <img src="/screenshots/step-generate.png" alt="The same clip with AI-timed text and VFX on the hero moment" width="468" height="1024" loading="lazy" />
     <figcaption>After — one hero moment that earns a replay</figcaption>
   </figure>
 </div>
@@ -173,7 +173,7 @@ If you’re stuck, this is the order I’d fix things:
 
 If you want a fast way to sanity-check your strategy, compare your Reels to what you personally save. Not what you “like.” What you save.
 
-Also, don’t forget the boring internal link once in a while: I keep a bunch of short-form editing notes on the homepage at [ThinkingCats](/) too.
+Also, don’t forget the boring internal link once in a while: I keep a bunch of short-form editing notes on the homepage at [PopMyVideo](/) too.
 
 ## One practical takeaway
 

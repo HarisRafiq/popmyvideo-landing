@@ -1,10 +1,10 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { STUDIO_NAME } from '../consts';
+import { APP_NAME } from '../consts';
 ---
 
 <BaseLayout 
-    title={`404 — Page Not Found | ${STUDIO_NAME}`} 
+    title={`404 — Page Not Found | ${APP_NAME}`} 
     description="We couldn't find the page you were looking for. Perhaps it's been moved or deleted."
     robots="noindex, follow"
 >
@@ -16,7 +16,7 @@ import { STUDIO_NAME } from '../consts';
             <div class="mb-12 relative inline-block">
                 <span class="serif text-[120px] md:text-[180px] leading-none text-white/5 font-bold select-none">404</span>
                 <div class="absolute inset-0 flex items-center justify-center">
-                    <img src="/logo.png" alt={STUDIO_NAME} class="w-20 h-20 md:w-24 md:h-24 object-contain transform -rotate-6" />
+                    <img src="/logo.png" alt={APP_NAME} class="w-20 h-20 md:w-24 md:h-24 object-contain transform -rotate-6" width="96" height="96" />
                 </div>
             </div>
 
@@ -25,7 +25,7 @@ import { STUDIO_NAME } from '../consts';
             </h1>
             
             <p class="text-[var(--text-muted)] text-lg md:text-xl leading-relaxed mb-12 max-w-lg mx-auto">
-                We couldn't find the page you were looking for. Let's get you back to the studio.
+                We couldn't find the page you were looking for. Let's get you back to PopMyVideo.
             </p>
 
             <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -33,7 +33,7 @@ import { STUDIO_NAME } from '../consts';
                     href="/" 
                     class="w-full sm:w-auto cta-primary font-black px-10 py-5 rounded-2xl md:rounded-3xl active:scale-95 text-[10px] uppercase tracking-[0.2em] cta-glow"
                 >
-                    Back to Studio
+                    Back to Home
                 </a>
                 <a 
                     href="/blog/" 

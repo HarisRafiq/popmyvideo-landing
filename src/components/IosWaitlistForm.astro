@@ -3,38 +3,27 @@ import { IOS_WAITLIST_SCRIPT_URL } from '../consts';
 
 interface Props {
 	id?: string;
-	variant?: 'hero' | 'cta';
 }
 
-const { id = 'ios-waitlist', variant = 'hero' } = Astro.props;
+const { id = 'ios-waitlist' } = Astro.props;
 const formId = `${id}-form`;
 const emailId = `${id}-email`;
 const successId = `${id}-success`;
-const isCta = variant === 'cta';
 ---
 
-<div id={id} class:list={['ios-waitlist', isCta && 'ios-waitlist--cta']}>
+<div id={id} class="ios-waitlist">
 	<form id={formId} class="ios-waitlist__form" data-script-url={IOS_WAITLIST_SCRIPT_URL} data-success-id={successId}>
 		<input
 			type="email"
 			id={emailId}
 			name="email"
-			placeholder="Email for iOS waitlist"
+			placeholder="Email for iOS"
 			required
 			autocomplete="email"
-			class:list={[
-				'ios-waitlist__input',
-				isCta ? 'ios-waitlist__input--cta' : 'ios-waitlist__input--hero',
-			]}
+			class="ios-waitlist__input"
 		/>
-		<button
-			type="submit"
-			class:list={[
-				'ios-waitlist__button',
-				isCta ? 'ios-waitlist__button--cta' : 'ios-waitlist__button--hero',
-			]}
-		>
-			{isCta ? 'Join waitlist' : 'Join iOS waitlist'}
+		<button type="submit" class="btn btn-secondary ios-waitlist__submit">
+			Notify me
 		</button>
 	</form>
 	<p id={successId} class="ios-waitlist__success hidden" role="status">
@@ -43,114 +32,52 @@ const isCta = variant === 'cta';
 </div>
 
 <style>
-	.ios-waitlist__form {
-		display: flex;
-		flex-direction: column;
-		gap: 0.75rem;
+	.ios-waitlist {
 		width: 100%;
 	}
 
-	@media (min-width: 640px) {
-		.ios-waitlist--cta .ios-waitlist__form {
-			flex-direction: row;
-			max-width: 28rem;
-			margin-inline: auto;
-		}
-
-		.ios-waitlist:not(.ios-waitlist--cta) .ios-waitlist__form {
-			flex-direction: row;
-		}
+	.ios-waitlist__form {
+		display: grid;
+		grid-template-columns: 1fr auto;
+		gap: 0.5rem;
+		width: 100%;
 	}
 
 	.ios-waitlist__input {
-		flex: 1;
 		min-width: 0;
-		border-radius: 1rem;
+		padding: 0.8125rem 1rem;
+		border-radius: 0.75rem;
+		background: rgba(255, 255, 255, 0.05);
+		border: 1px solid rgba(255, 255, 255, 0.12);
+		color: var(--text-main);
+		font: inherit;
+		font-size: 0.9375rem;
 		outline: none;
 		transition: border-color 0.2s, box-shadow 0.2s;
 	}
 
-	.ios-waitlist__input--hero {
-		background: rgba(255, 255, 255, 0.05);
-		border: 1px solid rgba(255, 255, 255, 0.12);
-		padding: 0.875rem 1.25rem;
-		color: #f1f5f9;
-		font-size: 0.875rem;
+	.ios-waitlist__input::placeholder {
+		color: var(--text-muted);
 	}
 
-	.ios-waitlist__input--hero::placeholder {
-		color: rgba(148, 163, 184, 0.8);
+	.ios-waitlist__input:focus {
+		border-color: var(--brand-pink);
+		box-shadow: 0 0 0 3px rgba(255, 61, 154, 0.12);
 	}
 
-	.ios-waitlist__input--hero:focus {
-		border-color: #ff6b35;
-		box-shadow: 0 0 0 4px rgba(255, 107, 53, 0.15);
-	}
-
-	.ios-waitlist__input--cta {
-		background: rgba(255, 255, 255, 0.08);
-		border: 1px solid rgba(255, 255, 255, 0.15);
-		padding: 1rem 1.25rem;
-		color: #fff;
-		font-size: 0.875rem;
-	}
-
-	.ios-waitlist__input--cta::placeholder {
-		color: rgba(255, 255, 255, 0.5);
-	}
-
-	.ios-waitlist__input--cta:focus {
-		border-color: #22d3ee;
-		box-shadow: 0 0 0 4px rgba(34, 211, 238, 0.15);
-	}
-
-	.ios-waitlist__button {
-		font-weight: 800;
-		text-transform: uppercase;
-		letter-spacing: 0.2em;
-		font-size: 10px;
-		border-radius: 1rem;
-		transition: background 0.2s, color 0.2s, transform 0.15s;
-		white-space: nowrap;
-	}
-
-	.ios-waitlist__button:active {
-		transform: scale(0.98);
-	}
-
-	.ios-waitlist__button--hero {
-		background: rgba(255, 255, 255, 0.08);
-		border: 1px solid rgba(255, 255, 255, 0.12);
-		color: #f1f5f9;
-		padding: 0.875rem 1.5rem;
-	}
-
-	.ios-waitlist__button--hero:hover {
-		border-color: #22d3ee;
-		color: #22d3ee;
-	}
-
-	.ios-waitlist__button--cta {
-		background: rgba(255, 255, 255, 0.95);
-		color: #050508;
-		padding: 1rem 1.5rem;
-	}
-
-	.ios-waitlist__button--cta:hover {
-		background: #ff6b35;
-		color: #fff;
+	.ios-waitlist__submit {
+		flex-shrink: 0;
 	}
 
 	.ios-waitlist__success {
-		margin-top: 0.75rem;
+		margin-top: 0.625rem;
 		font-size: 0.875rem;
-		font-weight: 700;
+		font-weight: 600;
 		color: #34d399;
-		text-align: center;
 	}
 
-	.ios-waitlist--cta .ios-waitlist__success {
-		color: #6ee7b7;
+	.store-cta--center .ios-waitlist__success {
+		text-align: center;
 	}
 </style>
 

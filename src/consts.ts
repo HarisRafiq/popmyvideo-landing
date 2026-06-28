@@ -3,15 +3,26 @@
 
 export const SITE_URL = 'https://popmyvideo.com';
 
-export const STUDIO_NAME = 'ThinkingCats';
 export const APP_NAME = 'PopMyVideo';
-export const DEVELOPER_NAME = STUDIO_NAME;
+export const STUDIO_NAME = APP_NAME;
+export const DEVELOPER_NAME = 'ThinkingCats';
 
-export const SITE_TITLE = STUDIO_NAME;
+export const SITE_TITLE = APP_NAME;
 export const SITE_DESCRIPTION =
-	'ThinkingCats builds mobile tools for creators. PopMyVideo — auto captions, motion, and AI effects for Reels and Shorts. Android live — iOS waitlist open.';
+	'Turn any video into scroll-stopping content — from YouTube documentaries to TikTok Reels. Auto captions, motion graphics, and AI effects. No timeline. No editing skills. Free on Android.';
 
-export const PRODUCT_LOGO = '/popmyvideo-logo.png';
+export const PRODUCT_LOGO = '/logo.png';
+export const PRODUCT_LOGO_MARK = '/logo-mark.svg';
+export const DEVELOPER_LOGO = '/thinkingcats-logo.png';
+
+/** Brand palette — derived from the PopMyVideo logo (pink MY, purple play, cyan shards). */
+export const BRAND = {
+	pink: '#FF3D9A',
+	magenta: '#E040FB',
+	purple: '#7C3AED',
+	cyan: '#00E5FF',
+	blue: '#3B82F6',
+} as const;
 
 export const IOS_WAITLIST_SCRIPT_URL =
 	'https://script.google.com/macros/s/AKfycbw3eEO0bvPWvruqysG4gXDMq1HwZ55QjDKzj8RCUM37lZmaTLZkboKw7fVYhcD-r9DLlQ/exec';

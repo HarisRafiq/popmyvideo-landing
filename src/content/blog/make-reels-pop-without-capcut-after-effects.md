@@ -2,7 +2,7 @@
 title: "Make Your Reels Pop Without Hours in CapCut or After Effects"
 description: "Manual Reels editing vs AI auto-effects — real time costs, what actually changes on screen, and when each path is worth it."
 pubDate: 2026-06-18
-heroImage: "/screenshots/ai-polish.png"
+heroImage: "/screenshots/step-generate.png"
 tags: ["Instagram Reels", "CapCut", "After Effects", "video VFX", "short-form video"]
 ---
 
@@ -57,7 +57,7 @@ Manual editing wins when you need pixel-level control: brand colors locked, a sp
 
 A different approach: don't open a timeline. Import one clip. Let software scan the frames, find where the energy spikes, and propose effects timed to those moments.
 
-That's what we built [ThinkingCats](https://popmyvideo.com) for — not to replace a full edit suite, but to skip the part where you're keyframing a glow on frame 47.
+That's what we built [PopMyVideo](https://popmyvideo.com) for — not to replace a full edit suite, but to skip the part where you're keyframing a glow on frame 47.
 
 Rough workflow:
 
@@ -72,11 +72,11 @@ The tradeoff: you're choosing from what the system generates, not drawing a mask
 
 <div class="before-after">
   <figure>
-    <img src="/screenshots/you-shoot.png" alt="Cliff-jump clip in ThinkingCats before polish" width="1290" height="2796" loading="lazy" />
+    <img src="/screenshots/step-import.png" alt="Cliff-jump clip in PopMyVideo before polish" width="468" height="1024" loading="lazy" />
     <figcaption>Before — straight from camera roll</figcaption>
   </figure>
   <figure>
-    <img src="/screenshots/ai-polish.png" alt="Same cliff-jump clip with AI-timed text and VFX overlays" width="1290" height="2796" loading="lazy" />
+    <img src="/screenshots/step-generate.png" alt="Same cliff-jump clip with AI-timed text and VFX overlays" width="468" height="1024" loading="lazy" />
     <figcaption>After — timed accents on the jump</figcaption>
   </figure>
 </div>
@@ -91,11 +91,11 @@ With auto-detection, the app marks candidate beats first — the arm extension, 
 
 <div class="before-after">
   <figure>
-    <img src="/screenshots/you-shoot.png" alt="ThinkingCats analyzing a clip with motion markers on each frame" width="1290" height="2796" loading="lazy" />
+    <img src="/screenshots/step-import.png" alt="PopMyVideo analyzing a clip with motion markers on each frame" width="468" height="1024" loading="lazy" />
     <figcaption>Before — scanning for hits</figcaption>
   </figure>
   <figure>
-    <img src="/screenshots/prompt-versions.png" alt="Effect version picker with multiple AI polish styles to choose from" width="1290" height="2796" loading="lazy" />
+    <img src="/screenshots/step-regenerate.png" alt="Effect version picker with multiple AI polish styles to choose from" width="468" height="1024" loading="lazy" />
     <figcaption>After — pick a version or prompt the vibe</figcaption>
   </figure>
 </div>

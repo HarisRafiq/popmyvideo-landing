@@ -3,7 +3,7 @@ title: ""
 description: ""
 pubDate: 2026-06-18
 draft: true
-heroImage: "/screenshots/ai-polish.png"
+heroImage: "/screenshots/step-generate.png"
 tags: []
 ---
 

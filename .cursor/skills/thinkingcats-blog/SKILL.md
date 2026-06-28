@@ -64,11 +64,11 @@ Use raw HTML in the `.md` file (Astro renders it). Always use project screenshot
 ```html
 <div class="before-after">
   <figure>
-    <img src="/screenshots/you-shoot.png" alt="Describe what's in the frame" width="1290" height="2796" loading="lazy" />
+    <img src="/screenshots/step-import.png" alt="Describe what's in the frame" width="1290" height="2796" loading="lazy" />
     <figcaption>Before — plain phone footage</figcaption>
   </figure>
   <figure>
-    <img src="/screenshots/ai-polish.png" alt="Same clip with effect applied" width="1290" height="2796" loading="lazy" />
+    <img src="/screenshots/step-generate.png" alt="Same clip with effect applied" width="1290" height="2796" loading="lazy" />
     <figcaption>After — neon trail on the hit</figcaption>
   </figure>
 </div>

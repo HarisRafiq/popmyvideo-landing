@@ -2,7 +2,7 @@
 import type { CollectionEntry } from 'astro:content';
 import BaseLayout from './BaseLayout.astro';
 import FormattedDate from '../components/FormattedDate.astro';
-import { PLAY_STORE_URL, APP_NAME, STUDIO_NAME, SITE_URL } from '../consts';
+import { PLAY_STORE_URL, APP_NAME, SITE_URL } from '../consts';
 
 type Props = CollectionEntry<'blog'>['data'] & {
 	readingTime?: number;
@@ -24,12 +24,12 @@ const jsonLd = {
     "url": new URL(canonicalPath, siteUrl).href,
     "author": {
         "@type": "Organization",
-        "name": STUDIO_NAME,
+        "name": APP_NAME,
         "url": siteUrl
     },
     "publisher": {
         "@type": "Organization",
-        "name": STUDIO_NAME,
+        "name": APP_NAME,
         "url": siteUrl
     },
     ...(tags?.length ? { "keywords": tags.join(", ") } : {})
@@ -37,7 +37,7 @@ const jsonLd = {
 ---
 
 <BaseLayout
-    title={`${title} | ${STUDIO_NAME} Blog`}
+    title={`${title} | ${APP_NAME} Blog`}
     description={description}
     image={heroImage}
     keywords={tags?.join(", ")}
@@ -88,11 +88,11 @@ const jsonLd = {
 			<footer class="mt-24 pt-12 border-t border-[var(--border-subtle)] flex flex-col md:flex-row items-center justify-between gap-8">
 				<div class="flex items-center gap-4">
 					<div class="w-12 h-12 rounded-full flex items-center justify-center overflow-hidden border border-[var(--border-subtle)]">
-						<img src="/logo.png" alt={STUDIO_NAME} class="w-8 h-8 object-contain" />
+						<img src="/logo.png" alt={APP_NAME} class="w-8 h-8 object-contain" width="32" height="32" />
 					</div>
 					<div>
 						<p class="text-[10px] uppercase tracking-widest font-black text-[var(--text-muted)]">Written by</p>
-						<p class="font-bold text-[var(--text-main)]">{STUDIO_NAME} Team</p>
+						<p class="font-bold text-[var(--text-main)]">{APP_NAME} Team</p>
 					</div>
 				</div>
 				

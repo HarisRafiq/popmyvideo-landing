@@ -1,0 +1,17 @@
+---
+import PlayStoreButton from './PlayStoreButton.astro';
+import IosWaitlistForm from './IosWaitlistForm.astro';
+
+interface Props {
+	id?: string;
+	centered?: boolean;
+	class?: string;
+}
+
+const { id = 'ios-waitlist', centered = false, class: className = '' } = Astro.props;
+---
+
+<div class:list={['store-cta', centered && 'store-cta--center', className]}>
+	<PlayStoreButton />
+	<IosWaitlistForm {id} />
+</div>
