@@ -21,11 +21,12 @@ import { APP_NAME, DEVELOPER_NAME, ANDROID_PACKAGE_ID, IOS_BUNDLE_ID } from '../
 
 			<div class="prose-body prose">
 
-				<p class="last-updated"><strong>Last updated:</strong> June 26, 2026</p>
+				<p class="last-updated"><strong>Last updated:</strong> June 30, 2026</p>
 
 				<section>
-					<p><strong>Cats Build Ltd</strong> trading as <strong>{DEVELOPER_NAME}</strong> ("we", "us", "our") publishes <strong>{APP_NAME}</strong>, a mobile video editing app that helps you turn raw clips into a finished cut by adding visual and sound effects. This policy describes how we collect, use, and protect your information when you use {APP_NAME} on <strong>Android</strong> (<code>{ANDROID_PACKAGE_ID}</code>) or <strong>iOS</strong> (<code>{IOS_BUNDLE_ID}</code>).</p>
+					<p><strong>Cats Build Ltd</strong> trading as <strong>{DEVELOPER_NAME}</strong> ("we", "us", "our") publishes <strong>{APP_NAME}</strong>, a mobile video app that helps you turn raw clips into polished social content by adding auto captions, motion graphics, and AI visual and sound effects on top of your footage. This policy describes how we collect, use, and protect your information when you use {APP_NAME} on <strong>Android</strong> (<code>{ANDROID_PACKAGE_ID}</code>) or <strong>iOS</strong> (<code>{IOS_BUNDLE_ID}</code>).</p>
 					<p>By using {APP_NAME}, you agree to this policy and our <a href="/terms/">Terms of Use (EULA)</a>. If you do not agree, please do not use the app.</p>
+					<p><strong>In-app consent:</strong> Before you use {APP_NAME}, we ask for your explicit permission to send derived video frames and audio to third-party AI providers for processing. You must agree in the app before any cloud AI processing occurs.</p>
 				</section>
 
 				<section>
@@ -49,13 +50,26 @@ import { APP_NAME, DEVELOPER_NAME, ANDROID_PACKAGE_ID, IOS_BUNDLE_ID } from '../
 					</ul>
 					<p>Video files and project timelines remain on your device. We do not store your video library or editor projects on our servers.</p>
 
-					<h3>Cloud AI processing</h3>
-					<p>When you use AI features (shot analysis, visual effects generation, sound effects generation), portions of your video or derived frames may be sent to our <strong>Intelligence API</strong> and processed by third-party AI providers, including:</p>
+					<h3>Photos and videos on your device</h3>
 					<ul>
-						<li><strong>Google Gemini</strong> (shot analysis and effect generation)</li>
-						<li><strong>fal.ai</strong> (media generation where applicable)</li>
+						<li><strong>Import:</strong> You choose <strong>one</strong> video at a time through the system file picker (Files or, on iOS, your photo library). Only the clip you select is copied into the app. We do not scan or upload your entire photo library.</li>
+						<li><strong>Export:</strong> If you save a finished video, it is written to your photo library (or shared via the system share sheet) at your request.</li>
+						<li><strong>Permissions:</strong> iOS may ask for photo library access to import a selected video and/or save an export. You can deny access and still use other parts of the app, but import from the library or save-to-Photos will not work without the relevant permission.</li>
 					</ul>
-					<p>We send only what is needed to perform the requested feature. Your full video file stays on your device; we send compressed storyboard frames and audio from the selected window — not your entire library. Reference frames derived from your video are deleted after processing. We do not use your content to train public AI models on your behalf.</p>
+
+					<h3>Cloud AI processing</h3>
+					<p>When you use {APP_NAME}, derived content from your videos is sent to our cloud processing service and processed by third-party AI providers, including:</p>
+					<ul>
+						<li><strong>Google Gemini</strong> (shot analysis, captions, and visual effect generation)</li>
+						<li><strong>fal.ai</strong> (sound and media generation, including ElevenLabs and Lyria where applicable)</li>
+					</ul>
+					<p>We send:</p>
+					<ul>
+						<li>Compressed storyboard frames derived from your video (JPEG contact sheets)</li>
+						<li>Trimmed audio segments from your video</li>
+						<li>Text prompts and technical metadata needed to generate captions, motion, and effects</li>
+					</ul>
+					<p>Reference frames derived from your video are deleted after processing completes. We do not use your content to train public AI models on your behalf.</p>
 					<p>We may retain <strong>de-identified</strong> prompts, analysis text, and generated effect outputs in a shared technical cache to improve reliability and reduce processing cost. This cache is not linked to your account after you delete your account.</p>
 
 					<h3>Purchase information</h3>
@@ -70,7 +84,7 @@ import { APP_NAME, DEVELOPER_NAME, ANDROID_PACKAGE_ID, IOS_BUNDLE_ID } from '../
 					<h3>Usage data</h3>
 					<p>We record usage events to enforce monthly effect allowances and improve reliability, including:</p>
 					<ul>
-						<li>Feature type (e.g. VFX, SFX, shot analysis)</li>
+						<li>Feature type (e.g. captions, VFX, SFX, shot analysis)</li>
 						<li>Timestamps and quota debits</li>
 						<li>Error and job status for generation requests</li>
 					</ul>
@@ -81,8 +95,8 @@ import { APP_NAME, DEVELOPER_NAME, ANDROID_PACKAGE_ID, IOS_BUNDLE_ID } from '../
 					<h2>How we use information</h2>
 					<p>We use your information to:</p>
 					<ul>
-						<li>Authenticate you and sync projects across devices</li>
-						<li>Process AI features you request (VFX, SFX, shot analysis)</li>
+						<li>Authenticate you and manage your account</li>
+						<li>Process AI features you request (captions, VFX, SFX, shot analysis)</li>
 						<li>Enforce subscription plans and monthly effect limits</li>
 						<li>Process subscriptions and restore purchases</li>
 						<li>Maintain security, prevent abuse, and fix bugs</li>
@@ -102,13 +116,13 @@ import { APP_NAME, DEVELOPER_NAME, ANDROID_PACKAGE_ID, IOS_BUNDLE_ID } from '../
 								</tr>
 							</thead>
 							<tbody>
-								<tr><td>Supabase</td><td>Authentication, database, project sync</td></tr>
-								<tr><td>Google Cloud Run</td><td>Hosting our Intelligence API</td></tr>
+								<tr><td>Supabase</td><td>Authentication and database</td></tr>
+								<tr><td>Google Cloud Run</td><td>Hosting our cloud processing service</td></tr>
 								<tr><td>Google Gemini</td><td>AI analysis and generation</td></tr>
-								<tr><td>fal.ai</td><td>Media generation</td></tr>
+								<tr><td>fal.ai</td><td>Media generation (including ElevenLabs, Lyria)</td></tr>
 								<tr><td>RevenueCat</td><td>Subscription management</td></tr>
-								<tr><td>Google Play</td><td>Billing and subscription fulfillment (Android)</td></tr>
 								<tr><td>Apple App Store</td><td>Billing and subscription fulfillment (iOS)</td></tr>
+								<tr><td>Google Play</td><td>Billing and subscription fulfillment (Android)</td></tr>
 							</tbody>
 						</table>
 					</div>
@@ -139,7 +153,7 @@ import { APP_NAME, DEVELOPER_NAME, ANDROID_PACKAGE_ID, IOS_BUNDLE_ID } from '../
 					</ul>
 					<p><strong>Delete your account in the app:</strong> Account → <strong>Delete account &amp; data</strong>. This removes your account, billing linkage, usage history, user-scoped AI data, and reference images from our servers. Local projects on your device are also cleared.</p>
 					<p>You can also contact us at the email below for access or deletion requests (for example if you cannot sign in).</p>
-					<p>You can cancel subscriptions anytime in <strong>Google Play → Subscriptions</strong> (Android) or <strong>Settings → Apple ID → Subscriptions</strong> (iOS). Account deletion does not cancel store billing. See our <a href="/terms/#subscriptions">Terms of Use</a> for full subscription terms.</p>
+					<p>You can cancel subscriptions anytime in <strong>Settings → Apple ID → Subscriptions</strong> (iOS) or <strong>Google Play → Subscriptions</strong> (Android). Account deletion does not cancel store billing. See our <a href="/terms/#subscriptions">Terms of Use</a> for full subscription terms.</p>
 				</section>
 
 				<section>
@@ -180,24 +194,27 @@ import { APP_NAME, DEVELOPER_NAME, ANDROID_PACKAGE_ID, IOS_BUNDLE_ID } from '../
 				<section>
 					<h2>Store privacy disclosures</h2>
 
-					<h3>Google Play (Android)</h3>
-					<p>When completing the Play Console Data safety form, declare approximately:</p>
+					<h3>Apple App Store (iOS)</h3>
+					<p>When completing App Store Connect privacy labels, declare approximately:</p>
 					<ul>
-						<li><strong>Data collected:</strong> Email, user IDs, app interactions, user-generated content (video sent for processing), purchase history (via Play/RevenueCat)</li>
-						<li><strong>Data shared:</strong> With service providers listed above</li>
-						<li><strong>Purpose:</strong> App functionality, account management, fraud prevention, analytics (quota metering only)</li>
-						<li><strong>Optional vs required:</strong> Account required for cloud sync and AI features; media access required for editing</li>
+						<li><strong>Data collected:</strong> Email, user IDs, product interaction, photos or videos (user-selected clip import, export to Photos, and derived frames/audio sent for AI processing), purchase history (via App Store/RevenueCat)</li>
+						<li><strong>Photos or videos:</strong> Declare <strong>App Functionality</strong> for (1) reading the user-selected import clip via the system picker, (2) saving exports to Photos, and (3) derived frames/audio sent for cloud AI — linked to the user, not used for tracking</li>
+						<li><strong>Data linked to you:</strong> Yes (account, user-selected video content and AI processing, subscriptions)</li>
+						<li><strong>Data used to track you:</strong> No</li>
+						<li><strong>Purpose:</strong> App functionality, account management</li>
+						<li><strong>Third-party sharing:</strong> Google Gemini, fal.ai (and subprocessors) for AI processing</li>
 						<li><strong>Encryption:</strong> Data encrypted in transit</li>
 						<li><strong>Deletion:</strong> In-app Account → Delete account &amp; data; email fallback for locked-out users</li>
 					</ul>
 
-					<h3>Apple App Store (iOS)</h3>
-					<p>When completing App Store Connect privacy labels, declare approximately:</p>
+					<h3>Google Play (Android)</h3>
+					<p>When completing the Play Console Data safety form, declare approximately:</p>
 					<ul>
-						<li><strong>Data linked to you:</strong> Email, user ID, purchase history, product interaction (quota and feature usage)</li>
-						<li><strong>Data used for tracking:</strong> None — we do not use your data for advertising or cross-app tracking</li>
-						<li><strong>Purpose:</strong> App functionality, account management, subscription fulfillment</li>
-						<li><strong>Third-party SDKs:</strong> Supabase, RevenueCat, and AI providers listed above</li>
+						<li><strong>Data collected:</strong> Email, user IDs, app interactions, user-generated content (derived frames and audio sent for processing), purchase history (via Play/RevenueCat)</li>
+						<li><strong>Data shared:</strong> With service providers listed above, including third-party AI processors</li>
+						<li><strong>Purpose:</strong> App functionality, account management, fraud prevention, analytics (quota metering only)</li>
+						<li><strong>Optional vs required:</strong> Account required for AI features; in-app consent required before cloud AI processing</li>
+						<li><strong>Encryption:</strong> Data encrypted in transit</li>
 						<li><strong>Deletion:</strong> In-app Account → Delete account &amp; data; email fallback for locked-out users</li>
 					</ul>
 				</section>
