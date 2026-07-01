@@ -1,6 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { APP_NAME, DEVELOPER_NAME, ANDROID_PACKAGE_ID, IOS_BUNDLE_ID } from '../consts';
+import { APP_NAME, DEVELOPER_NAME, ANDROID_PACKAGE_ID } from '../consts';
 ---
 
 <BaseLayout title={`Privacy Policy — ${APP_NAME}`} description={`How ${DEVELOPER_NAME} collects, uses, and protects your information when you use ${APP_NAME} on Android and iOS.`}>
@@ -21,12 +21,12 @@ import { APP_NAME, DEVELOPER_NAME, ANDROID_PACKAGE_ID, IOS_BUNDLE_ID } from '../
 
 			<div class="prose-body prose">
 
-				<p class="last-updated"><strong>Last updated:</strong> June 30, 2026</p>
+				<p class="last-updated"><strong>Last updated:</strong> July 1, 2026</p>
 
 				<section>
-					<p><strong>Cats Build Ltd</strong> trading as <strong>{DEVELOPER_NAME}</strong> ("we", "us", "our") publishes <strong>{APP_NAME}</strong>, a mobile video app that helps you turn raw clips into polished social content by adding auto captions, motion graphics, and AI visual and sound effects on top of your footage. This policy describes how we collect, use, and protect your information when you use {APP_NAME} on <strong>Android</strong> (<code>{ANDROID_PACKAGE_ID}</code>) or <strong>iOS</strong> (<code>{IOS_BUNDLE_ID}</code>).</p>
-					<p>By using {APP_NAME}, you agree to this policy and our <a href="/terms/">Terms of Use (EULA)</a>. If you do not agree, please do not use the app.</p>
-					<p><strong>In-app consent:</strong> Before you use {APP_NAME}, we ask for your explicit permission to send derived video frames and audio to third-party AI providers for processing. You must agree in the app before any cloud AI processing occurs.</p>
+					<p><strong>{APP_NAME}</strong> is published by <strong>Cats Build Ltd</strong> trading as <strong>{DEVELOPER_NAME}</strong> ("we", "us", "our"). {APP_NAME} is a mobile video app that helps you turn raw clips into polished social content by adding auto captions, motion graphics, and AI visual and sound effects on top of your footage. This policy describes how we collect, use, and protect your information when you use {APP_NAME} for iOS and Android (<code>{ANDROID_PACKAGE_ID}</code>).</p>
+					<p>By using {APP_NAME}, you agree to this policy and our <a href="/terms/">Terms of Use</a>. If you do not agree, please do not use the app.</p>
+					<p><strong>In-app consent:</strong> Before cloud AI analysis or generation runs, {APP_NAME} shows a consent screen that explains what is sent and which third-party providers receive it. You can browse projects without agreeing; AI features ask for consent when you use them. Revoking consent in Account stops cloud AI until you agree again.</p>
 				</section>
 
 				<section>
@@ -58,28 +58,28 @@ import { APP_NAME, DEVELOPER_NAME, ANDROID_PACKAGE_ID, IOS_BUNDLE_ID } from '../
 					</ul>
 
 					<h3>Cloud AI processing</h3>
-					<p>When you use {APP_NAME}, derived content from your videos is sent to our cloud processing service and processed by third-party AI providers, including:</p>
+					<p>Your <strong>full video files stay on your device</strong>. We do not upload your entire video library. When you use AI features, we send only derived content from the clip you are editing.</p>
+
+					<p><strong>What we send</strong></p>
 					<ul>
-						<li><strong>Google Gemini</strong> (shot analysis, captions, and visual effect generation)</li>
-						<li><strong>fal.ai</strong> (sound and media generation, including ElevenLabs and Lyria where applicable)</li>
-					</ul>
-					<p>We send:</p>
-					<ul>
-						<li>Compressed storyboard frames derived from your video (JPEG contact sheets)</li>
+						<li>Compressed storyboard frames derived from your video</li>
 						<li>Trimmed audio segments from your video</li>
-						<li>Text prompts and technical metadata needed to generate captions, motion, and effects</li>
+						<li>Text prompts you enter and technical metadata needed to generate effects</li>
 					</ul>
-					<p>Reference frames derived from your video are deleted after processing completes. We do not use your content to train public AI models on your behalf.</p>
+
+					<p><strong>Who receives it</strong></p>
+					<ul>
+						<li><strong>Google Gemini (Google LLC)</strong> — receives derived video frames and trimmed audio from your clip for shot analysis, effect planning, and visual effects (VFX) generation</li>
+						<li><strong>fal.ai</strong> — receives <strong>text prompts only</strong> (not your video or audio). Our server sends prompts to fal.ai to generate sound effects. fal.ai may use subprocessors such as ElevenLabs or Lyria</li>
+					</ul>
+
+					<p>Derived video frames and trimmed audio sent to Google Gemini are deleted after processing completes. We do not use your content to train public AI models on your behalf.</p>
 					<p>We may retain <strong>de-identified</strong> prompts, analysis text, and generated effect outputs in a shared technical cache to improve reliability and reduce processing cost. This cache is not linked to your account after you delete your account.</p>
+					<p><strong>Revoke consent:</strong> Account → <strong>Revoke AI access</strong> clears consent on this device. You stay signed in; cloud AI stops until you agree again on your next AI action.</p>
 
 					<h3>Purchase information</h3>
-					<p>If you subscribe to Creator or Pro, payment is processed by the store where you subscribed:</p>
-					<ul>
-						<li><strong>Android:</strong> Google Play Billing</li>
-						<li><strong>iOS:</strong> Apple App Store in-app purchases</li>
-					</ul>
-					<p>We receive subscription status through <strong>RevenueCat</strong> (entitlement and renewal state tied to your account). We do not receive or store your full payment card number.</p>
-					<p>Subscriptions are auto-renewing. Billing, renewal timing, cancellation, free-trial terms, and refunds are governed by the store where you subscribed and are described in our <a href="/terms/#subscriptions">Terms of Use (EULA)</a>.</p>
+					<p>If you subscribe to Creator or Pro, payment is processed by <strong>Apple App Store</strong> (iOS) or <strong>Google Play Billing</strong> (Android). We receive subscription status through <strong>RevenueCat</strong> (entitlement and renewal state tied to your account). We do not receive or store your full payment card number.</p>
+					<p>Subscriptions are auto-renewing. Billing, renewal timing, cancellation, free-trial terms, and refunds are governed by the store where you subscribed and are described in our <a href="/terms/#subscriptions">Terms of Use</a>.</p>
 
 					<h3>Usage data</h3>
 					<p>We record usage events to enforce monthly effect allowances and improve reliability, including:</p>
@@ -118,8 +118,8 @@ import { APP_NAME, DEVELOPER_NAME, ANDROID_PACKAGE_ID, IOS_BUNDLE_ID } from '../
 							<tbody>
 								<tr><td>Supabase</td><td>Authentication and database</td></tr>
 								<tr><td>Google Cloud Run</td><td>Hosting our cloud processing service</td></tr>
-								<tr><td>Google Gemini</td><td>AI analysis and generation</td></tr>
-								<tr><td>fal.ai</td><td>Media generation (including ElevenLabs, Lyria)</td></tr>
+								<tr><td>Google Gemini</td><td>AI analysis and VFX generation (receives derived video frames and audio)</td></tr>
+								<tr><td>fal.ai</td><td>Sound generation from text prompts only (no user video or audio)</td></tr>
 								<tr><td>RevenueCat</td><td>Subscription management</td></tr>
 								<tr><td>Apple App Store</td><td>Billing and subscription fulfillment (iOS)</td></tr>
 								<tr><td>Google Play</td><td>Billing and subscription fulfillment (Android)</td></tr>
@@ -186,32 +186,31 @@ import { APP_NAME, DEVELOPER_NAME, ANDROID_PACKAGE_ID, IOS_BUNDLE_ID } from '../
 					</p>
 					<p><strong>Email:</strong> <a href="mailto:support@thinkingcats.com">support@thinkingcats.com</a></p>
 					<p><strong>Terms of Use:</strong> <a href="/terms/">popmyvideo.com/terms</a></p>
-					<p><strong>App:</strong> {APP_NAME}</p>
-					<p><strong>Android:</strong> <code>{ANDROID_PACKAGE_ID}</code></p>
-					<p><strong>iOS:</strong> <code>{IOS_BUNDLE_ID}</code></p>
+					<p><strong>App:</strong> {APP_NAME} — <code>{ANDROID_PACKAGE_ID}</code> (iOS and Android)</p>
+					<p><strong>Website:</strong> <a href="https://popmyvideo.com">popmyvideo.com</a></p>
 				</section>
 
 				<section>
-					<h2>Store privacy disclosures</h2>
-
-					<h3>Apple App Store (iOS)</h3>
-					<p>When completing App Store Connect privacy labels, declare approximately:</p>
+					<h2>App Store Privacy alignment</h2>
+					<p>When completing App Store Connect → App Privacy, declare approximately:</p>
 					<ul>
 						<li><strong>Data collected:</strong> Email, user IDs, product interaction, photos or videos (user-selected clip import, export to Photos, and derived frames/audio sent for AI processing), purchase history (via App Store/RevenueCat)</li>
 						<li><strong>Photos or videos:</strong> Declare <strong>App Functionality</strong> for (1) reading the user-selected import clip via the system picker, (2) saving exports to Photos, and (3) derived frames/audio sent for cloud AI — linked to the user, not used for tracking</li>
 						<li><strong>Data linked to you:</strong> Yes (account, user-selected video content and AI processing, subscriptions)</li>
 						<li><strong>Data used to track you:</strong> No</li>
 						<li><strong>Purpose:</strong> App functionality, account management</li>
-						<li><strong>Third-party sharing:</strong> Google Gemini, fal.ai (and subprocessors) for AI processing</li>
+						<li><strong>Third-party sharing:</strong> Google Gemini (derived video frames and audio); fal.ai (text prompts for sound generation)</li>
 						<li><strong>Encryption:</strong> Data encrypted in transit</li>
 						<li><strong>Deletion:</strong> In-app Account → Delete account &amp; data; email fallback for locked-out users</li>
 					</ul>
+				</section>
 
-					<h3>Google Play (Android)</h3>
+				<section>
+					<h2>Google Play Data safety alignment</h2>
 					<p>When completing the Play Console Data safety form, declare approximately:</p>
 					<ul>
 						<li><strong>Data collected:</strong> Email, user IDs, app interactions, user-generated content (derived frames and audio sent for processing), purchase history (via Play/RevenueCat)</li>
-						<li><strong>Data shared:</strong> With service providers listed above, including third-party AI processors</li>
+						<li><strong>Data shared:</strong> With service providers listed above. User video/audio is sent to Google Gemini only; fal.ai receives text prompts only.</li>
 						<li><strong>Purpose:</strong> App functionality, account management, fraud prevention, analytics (quota metering only)</li>
 						<li><strong>Optional vs required:</strong> Account required for AI features; in-app consent required before cloud AI processing</li>
 						<li><strong>Encryption:</strong> Data encrypted in transit</li>
