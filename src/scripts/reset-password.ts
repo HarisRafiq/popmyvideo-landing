@@ -46,7 +46,9 @@ const parseParams = () => {
 	const hash = new URLSearchParams(window.location.hash.replace(/^#/, ''));
 	return {
 		code: url.searchParams.get('code'),
-		tokenHash: url.searchParams.get('token_hash'),
+		tokenHash: url.searchParams.get('token_hash') || hash.get('token_hash'),
+		otpToken: url.searchParams.get('token') || hash.get('token'),
+		email: url.searchParams.get('email') || hash.get('email'),
 		error: url.searchParams.get('error') || hash.get('error'),
 		errorDescription: url.searchParams.get('error_description') || hash.get('error_description'),
 		accessToken: url.searchParams.get('access_token') || hash.get('access_token'),
@@ -123,8 +125,17 @@ try {
 const bootstrap = async () => {
 	if (!supabase) return;
 
-	const { code, tokenHash, accessToken, refreshToken, error, errorDescription, type } =
-		parseParams();
+	const {
+		code,
+		tokenHash,
+		otpToken,
+		email,
+		accessToken,
+		refreshToken,
+		error,
+		errorDescription,
+		type,
+	} = parseParams();
 
 	if (error) {
 		show(errorDescription || 'This recovery link is invalid or expired.', 'error');
@@ -133,11 +144,20 @@ const bootstrap = async () => {
 	}
 
 	try {
-		// Cross-device recovery: email template should link with token_hash (not PKCE code).
-		if (tokenHash) {
+		const otpType = toOtpType(type);
+
+		// Best for Flutter-initiated resets: email + 6-digit OTP (no PKCE verifier needed).
+		if (email && otpToken) {
+			const { error: verifyError } = await supabase.auth.verifyOtp({
+				email,
+				token: otpToken,
+				type: otpType,
+			});
+			if (verifyError) throw verifyError;
+		} else if (tokenHash) {
 			const { error: verifyError } = await supabase.auth.verifyOtp({
 				token_hash: tokenHash,
-				type: toOtpType(type),
+				type: otpType,
 			});
 			if (verifyError) throw verifyError;
 		} else if (accessToken && refreshToken) {
