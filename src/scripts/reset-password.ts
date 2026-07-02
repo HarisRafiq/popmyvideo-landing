@@ -10,6 +10,7 @@ const nextSteps = document.getElementById('next-steps');
 const openApp = document.getElementById('open-app');
 
 type Variant = 'info' | 'success' | 'error';
+type OtpType = 'recovery' | 'signup' | 'email';
 
 const show = (message: string, variant: Variant = 'info') => {
 	if (!(alertBox instanceof HTMLElement) || !(alertText instanceof HTMLElement)) return;
@@ -45,6 +46,7 @@ const parseParams = () => {
 	const hash = new URLSearchParams(window.location.hash.replace(/^#/, ''));
 	return {
 		code: url.searchParams.get('code'),
+		tokenHash: url.searchParams.get('token_hash'),
 		error: url.searchParams.get('error') || hash.get('error'),
 		errorDescription: url.searchParams.get('error_description') || hash.get('error_description'),
 		accessToken: url.searchParams.get('access_token') || hash.get('access_token'),
@@ -60,6 +62,28 @@ const sanitizeUrl = () => {
 	window.history.replaceState({}, '', clean.toString());
 };
 
+const codeVerifierStorageKey = () => {
+	const url = import.meta.env.PUBLIC_SUPABASE_URL;
+	if (!url) return null;
+	const ref = new URL(url).hostname.split('.')[0];
+	return `sb-${ref}-auth-token-code-verifier`;
+};
+
+const hasStoredPkceVerifier = () => {
+	const key = codeVerifierStorageKey();
+	if (!key) return false;
+	try {
+		return !!localStorage.getItem(key);
+	} catch {
+		return false;
+	}
+};
+
+const toOtpType = (type: string | null): OtpType => {
+	if (type === 'signup' || type === 'email' || type === 'recovery') return type;
+	return 'recovery';
+};
+
 const showNextSteps = () => {
 	if (nextSteps instanceof HTMLElement) nextSteps.classList.remove('hidden');
 
@@ -69,15 +93,12 @@ const showNextSteps = () => {
 	const isAndroid = /Android/i.test(ua);
 	const isIOS = /iPhone|iPad|iPod/i.test(ua);
 
-	// Android: swap to the intent deep link.
 	if (isAndroid) {
 		const androidIntent = openApp.dataset.androidIntent;
 		if (androidIntent) openApp.href = androidIntent;
 		return;
 	}
 
-	// iOS: we can't deep-link without URL scheme / universal links configured.
-	// Give a safe UX: keep it on-page and tell the user what to do.
 	if (isIOS) {
 		openApp.href = '/#';
 		openApp.addEventListener('click', (e) => {
@@ -87,7 +108,6 @@ const showNextSteps = () => {
 		return;
 	}
 
-	// Desktop fallback: send to Play Store.
 	const desktopFallback = openApp.dataset.desktopFallback || openApp.dataset.playStore;
 	if (desktopFallback) openApp.href = desktopFallback;
 };
@@ -103,7 +123,8 @@ try {
 const bootstrap = async () => {
 	if (!supabase) return;
 
-	const { code, accessToken, refreshToken, error, errorDescription, type } = parseParams();
+	const { code, tokenHash, accessToken, refreshToken, error, errorDescription, type } =
+		parseParams();
 
 	if (error) {
 		show(errorDescription || 'This recovery link is invalid or expired.', 'error');
@@ -112,23 +133,32 @@ const bootstrap = async () => {
 	}
 
 	try {
-		// Handles newer PKCE-style links.
-		if (code) {
-			const { error: exchangeError } = await supabase.auth.exchangeCodeForSession(code);
-			if (exchangeError) throw exchangeError;
-		}
-
-		// Handles implicit token links (common for recovery).
-		if (accessToken && refreshToken) {
+		// Cross-device recovery: email template should link with token_hash (not PKCE code).
+		if (tokenHash) {
+			const { error: verifyError } = await supabase.auth.verifyOtp({
+				token_hash: tokenHash,
+				type: toOtpType(type),
+			});
+			if (verifyError) throw verifyError;
+		} else if (accessToken && refreshToken) {
+			// Implicit-flow links with tokens in the URL hash.
 			const { error: setSessionError } = await supabase.auth.setSession({
 				access_token: accessToken,
 				refresh_token: refreshToken,
 			});
 			if (setSessionError) throw setSessionError;
+		} else if (code && hasStoredPkceVerifier()) {
+			// PKCE only works in the same browser that requested the reset.
+			const { error: exchangeError } = await supabase.auth.exchangeCodeForSession(code);
+			if (exchangeError) throw exchangeError;
+		} else if (code) {
+			throw new Error(
+				'This reset link cannot be opened here. Request a new password reset from the app, then open the new email link on this device.',
+			);
 		}
 
 		const { data } = await supabase.auth.getSession();
-		if (!data.session || (type && type !== 'recovery' && type !== 'signup')) {
+		if (!data.session) {
 			show('This recovery link is invalid or expired. Request a new one from the app.', 'error');
 			if (form instanceof HTMLFormElement) form.classList.add('hidden');
 			return;
@@ -176,4 +206,3 @@ form?.addEventListener('submit', async (ev) => {
 		setBusy(false);
 	}
 });
-
