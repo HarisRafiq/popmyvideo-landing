@@ -16,7 +16,7 @@ export default defineConfig({
     mdx(),
     sitemap({
       filter: (page) =>
-        !page.includes('/email-confirmed') && !page.includes('/404'),
+        !page.includes('/email-confirmed') && !page.includes('/reset-password') && !page.includes('/404'),
       serialize(item) {
         const { pathname } = new URL(item.url);
         const blogDate = blogLastmod.get(pathname) ?? blogLastmod.get(item.url);
