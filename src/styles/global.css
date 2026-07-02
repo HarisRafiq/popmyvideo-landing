@@ -206,7 +206,8 @@ body {
     align-items: stretch;
 }
 
-.store-cta .btn-primary {
+.store-cta .btn-primary,
+.store-cta .btn-secondary {
     width: 100%;
 }
 

@@ -9,7 +9,7 @@ export const DEVELOPER_NAME = 'ThinkingCats';
 
 export const SITE_TITLE = APP_NAME;
 export const SITE_DESCRIPTION =
-	'Turn any video into scroll-stopping content — from YouTube documentaries to TikTok Reels. Auto captions, motion graphics, and AI effects. No timeline. No editing skills. Free on Android.';
+	'Turn any video into scroll-stopping content — from YouTube documentaries to TikTok Reels. Auto captions, motion graphics, and AI effects. No timeline. No editing skills. Free on Android and iOS.';
 
 export const PRODUCT_LOGO = '/logo.png';
 export const PRODUCT_LOGO_MARK = '/logo-mark.svg';
@@ -24,12 +24,10 @@ export const BRAND = {
 	blue: '#3B82F6',
 } as const;
 
-export const IOS_WAITLIST_SCRIPT_URL =
-	'https://script.google.com/macros/s/AKfycbw3eEO0bvPWvruqysG4gXDMq1HwZ55QjDKzj8RCUM37lZmaTLZkboKw7fVYhcD-r9DLlQ/exec';
-
 export const ANDROID_PACKAGE_ID = 'com.thinkingcats.catcut';
 export const IOS_BUNDLE_ID = 'com.thinkingcats.catcut';
 export const PLAY_STORE_URL = `https://play.google.com/store/apps/details?id=${ANDROID_PACKAGE_ID}`;
+export const APP_STORE_URL = 'https://apps.apple.com/pk/app/popmyvideo-ai-video-booster/id6780106608';
 
 /** Opens the installed app on Android; falls back to Play Store in the browser. */
 export const APP_LAUNCH_INTENT_URL = `intent://#Intent;package=${ANDROID_PACKAGE_ID};action=android.intent.action.MAIN;category=android.intent.category.LAUNCHER;S.browser_fallback_url=${encodeURIComponent(PLAY_STORE_URL)};end`;

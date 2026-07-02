@@ -2,10 +2,9 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import BrandLogo from '../components/BrandLogo.astro';
-import PlayStoreButton from '../components/PlayStoreButton.astro';
 import StoreCta from '../components/StoreCta.astro';
 import { isPublished, postSlug } from '../lib/blog';
-import { PLAY_STORE_URL, APP_NAME, SITE_DESCRIPTION, SITE_URL, DEVELOPER_NAME } from '../consts';
+import { PLAY_STORE_URL, APP_STORE_URL, APP_NAME, SITE_DESCRIPTION, SITE_URL, DEVELOPER_NAME } from '../consts';
 
 const siteUrl = SITE_URL;
 const screenshotDims = { width: 468, height: 1024 };
@@ -137,11 +136,11 @@ const faqs = [
 	},
 	{
 		q: 'How do I cancel my subscription?',
-		a: 'Payment is charged to your Google Play account. Subscriptions renew automatically unless canceled at least 24 hours before the end of the current period. Manage or cancel in Google Play → Payments & subscriptions.',
+		a: 'Payment is charged to your Google Play or Apple App Store account. Subscriptions renew automatically unless canceled at least 24 hours before the end of the current period. Manage or cancel in Google Play → Payments & subscriptions (Android) or Settings → Apple ID → Subscriptions (iOS).',
 	},
 	{
 		q: 'What do I need to use PopMyVideo?',
-		a: 'An internet connection for AI generation and an account (email sign-in). PopMyVideo is available on Android now — join the iOS waitlist for launch updates.',
+		a: 'An internet connection for AI generation and an account (email sign-in). PopMyVideo is available on Android and iOS.',
 	},
 	{
 		q: 'What kind of videos work?',
@@ -167,8 +166,8 @@ const jsonLd = {
 			operatingSystem: 'Android, iOS',
 			description: SITE_DESCRIPTION,
 			url: siteUrl,
-			downloadUrl: PLAY_STORE_URL,
-			installUrl: PLAY_STORE_URL,
+			downloadUrl: [PLAY_STORE_URL, APP_STORE_URL],
+			installUrl: [PLAY_STORE_URL, APP_STORE_URL],
 			offers: [
 				{ '@type': 'Offer', name: 'Free', price: '0', priceCurrency: 'USD' },
 				{ '@type': 'Offer', name: 'Creator', price: '9.99', priceCurrency: 'USD', priceSpecification: { '@type': 'UnitPriceSpecification', billingDuration: 'P1M' } },
@@ -213,7 +212,7 @@ const jsonLd = {
 					<div class="fade-up text-center lg:text-left order-2 lg:order-1">
 						<div class="inline-flex items-center gap-2 product-pill mb-6">
 							<span class="live-dot" aria-hidden="true"></span>
-							Android live · iOS waitlist open
+							Now on Android & iOS
 						</div>
 
 						<h1 class="display text-[2.5rem] sm:text-5xl lg:text-[3.75rem] leading-[1.05] tracking-tight text-[var(--text-main)] mb-5">
@@ -451,7 +450,7 @@ const jsonLd = {
 				</div>
 
 				<div class="text-center mt-12 md:mt-16 fade-up reveal">
-					<PlayStoreButton class="btn-glow" />
+					<StoreCta centered class="btn-glow" />
 				</div>
 			</div>
 		</section>
@@ -632,10 +631,10 @@ const jsonLd = {
 							<span class="gradient-text">Zero edit. More likes.</span>
 						</h2>
 						<p class="text-[var(--text-muted)] text-lg max-w-md mx-auto mb-8">
-							Download free on Android. Join the iOS waitlist. Turn your next clip into a scroll-stopper tonight.
+							Download free on Android and iOS. Turn your next clip into a scroll-stopper tonight.
 						</p>
 
-						<StoreCta id="ios-waitlist-bottom" centered class="mb-6" />
+						<StoreCta centered class="mb-6" />
 
 						<p class="text-[10px] font-bold text-[var(--text-muted)] uppercase tracking-widest">
 							Free tier · Video stays on device · Made by {DEVELOPER_NAME}

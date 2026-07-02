@@ -4,7 +4,7 @@ Only claim what's listed here.
 
 ## What it is
 
-Mobile app (Android live, iOS in development) that analyzes video footage and layers animated text, icons, shapes, and visual effects on top — timed to the action. Your original footage stays intact; polish is added as overlays, not by regenerating the video.
+Mobile app (Android and iOS) that analyzes video footage and layers animated text, icons, shapes, and visual effects on top — timed to the action. Your original footage stays intact; polish is added as overlays, not by regenerating the video.
 
 Built by ThinkingCats (https://thinkingcats.com).
 
@@ -29,8 +29,7 @@ Built by ThinkingCats (https://thinkingcats.com).
 
 - Product site: https://popmyvideo.com
 - Lab site: https://thinkingcats.com
-- Download: Google Play (link from site consts)
-- iOS waitlist: on popmyvideo.com homepage
+- Download: Google Play and App Store (links from site consts)
 
 ## Screenshots (public/screenshots/)
 

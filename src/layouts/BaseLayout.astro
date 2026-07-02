@@ -3,6 +3,7 @@ import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import BrandLogo from '../components/BrandLogo.astro';
 import PlayStoreButton from '../components/PlayStoreButton.astro';
+import AppStoreButton from '../components/AppStoreButton.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 
 interface Props {
@@ -32,7 +33,10 @@ const { title = SITE_TITLE, description = SITE_DESCRIPTION, image, keywords, rob
 					<a href="/#features" class="hidden sm:inline text-[var(--text-muted)] hover:text-[var(--text-main)] text-[10px] font-bold tracking-widest uppercase transition-colors">Features</a>
 					<a href="/#pricing" class="hidden sm:inline text-[var(--text-muted)] hover:text-[var(--text-main)] text-[10px] font-bold tracking-widest uppercase transition-colors">Pricing</a>
 					<a href="/blog/" class="text-[var(--text-muted)] hover:text-[var(--text-main)] text-[10px] font-bold tracking-widest uppercase transition-colors">Blog</a>
+				<div class="flex items-center gap-2 md:gap-3">
 					<PlayStoreButton size="nav" />
+					<AppStoreButton size="nav" />
+				</div>
 				</div>
 			</div>
 		</nav>

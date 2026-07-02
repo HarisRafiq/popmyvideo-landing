@@ -35,7 +35,7 @@ Avoid AI slop: "game-changer", "revolutionize", "dive deep", "unlock", "leverage
 6. When to use which — honest comparison
 7. One practical takeaway
 
-Target **900–1,400 words**. No `---` mid-article. No in-post CTA — layout footer handles download/waitlist.
+Target **900–1,400 words**. No `---` mid-article. No in-post CTA — layout footer handles download links.
 
 ## Frontmatter
 
