@@ -2,7 +2,8 @@
 import type { CollectionEntry } from 'astro:content';
 import BaseLayout from './BaseLayout.astro';
 import FormattedDate from '../components/FormattedDate.astro';
-import { PLAY_STORE_URL, APP_NAME, SITE_URL } from '../consts';
+import StoreCta from '../components/StoreCta.astro';
+import { APP_NAME, SITE_URL } from '../consts';
 
 type Props = CollectionEntry<'blog'>['data'] & {
 	readingTime?: number;
@@ -112,15 +113,8 @@ const jsonLd = {
 			<div class="absolute top-0 right-0 w-64 h-64 bg-[var(--accent-warm)]/10 blur-[100px] -translate-y-1/2 translate-x-1/2"></div>
 			<div class="relative z-10">
 				<h2 class="serif text-4xl mb-6 text-[var(--text-main)]">Try it on your next <span class="italic gradient-text">clip</span>.</h2>
-				<p class="text-[var(--text-muted)] mb-10 max-w-md mx-auto">Drop your video, add captions and effects — {APP_NAME} on Android now.</p>
-				<a
-					href={PLAY_STORE_URL}
-					target="_blank"
-					rel="noopener noreferrer"
-					class="inline-block cta-primary font-black px-8 py-4 rounded-2xl text-[10px] uppercase tracking-widest"
-				>
-					Download on Google Play
-				</a>
+				<p class="text-[var(--text-muted)] mb-10 max-w-md mx-auto">Drop your video, add captions and effects — {APP_NAME} on Android and iOS.</p>
+				<StoreCta centered />
 			</div>
 		</section>
 	</main>

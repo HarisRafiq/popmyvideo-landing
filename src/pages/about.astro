@@ -1,7 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import AppStoreButton from '../components/AppStoreButton.astro';
-import PlayStoreButton from '../components/PlayStoreButton.astro';
+import StoreCta from '../components/StoreCta.astro';
 import { APP_NAME } from '../consts';
 ---
 
@@ -51,10 +50,7 @@ import { APP_NAME } from '../consts';
 		<section class="mt-16 glass-card p-10 md:p-12 text-center">
 			<h2 class="serif text-3xl mb-4 text-[var(--text-main)]">Try {APP_NAME} on your next clip</h2>
 			<p class="text-[var(--text-muted)] mb-8 max-w-md mx-auto">Download on Android or iOS — polish a clip in minutes, not hours.</p>
-			<div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-				<PlayStoreButton />
-				<AppStoreButton />
-			</div>
+			<StoreCta centered />
 		</section>
 	</main>
 </BaseLayout>
