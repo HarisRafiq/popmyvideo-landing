@@ -2,39 +2,31 @@
 import { APP_NAME, PRODUCT_LOGO } from '../consts';
 
 interface Props {
-	variant?: 'nav' | 'hero' | 'footer' | 'mark';
+	variant?: 'nav' | 'hero' | 'footer';
 	class?: string;
 }
 
 const { variant = 'nav', class: className = '' } = Astro.props;
 
-const markSizes = { nav: 36, hero: 48, footer: 32, mark: 40 };
-const markSize = markSizes[variant];
+const logoSizes = { nav: 36, hero: 120, footer: 32 };
+const logoSize = logoSizes[variant];
 ---
 
 {
-	variant === 'mark' ? (
-		<img
-			src="/logo-mark.svg"
-			alt=""
-			width={markSize}
-			height={markSize}
-			class:list={['brand-mark', className]}
-		/>
-	) : variant === 'hero' ? (
+	variant === 'hero' ? (
 		<div class:list={['brand-lockup brand-lockup--hero', className]}>
 			<div class="brand-lockup__icon-wrap">
-				<img src={PRODUCT_LOGO} alt={APP_NAME} width="120" height="120" class="brand-lockup__logo" />
+				<img src={PRODUCT_LOGO} alt={APP_NAME} width={logoSize} height={logoSize} class="brand-lockup__logo" />
 			</div>
 		</div>
 	) : (
 		<span class:list={['brand-lockup', `brand-lockup--${variant}`, className]}>
 			<img
-				src="/logo-mark.svg"
+				src={PRODUCT_LOGO}
 				alt=""
-				width={markSize}
-				height={markSize}
-				class="brand-mark"
+				width={logoSize}
+				height={logoSize}
+				class="brand-lockup__icon"
 			/>
 			<span class="brand-wordmark" aria-label={APP_NAME}>
 				<span class="brand-wordmark__pop">Pop</span><span class="brand-wordmark__my">My</span><span class="brand-wordmark__video">Video</span>
@@ -50,7 +42,7 @@ const markSize = markSizes[variant];
 		gap: 0.625rem;
 	}
 
-	.brand-mark {
+	.brand-lockup__icon {
 		flex-shrink: 0;
 		display: block;
 	}

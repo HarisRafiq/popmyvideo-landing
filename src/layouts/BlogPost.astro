@@ -6,7 +6,7 @@ import StoreCta from '../components/StoreCta.astro';
 import { getCategoryBySlug } from '../lib/categories';
 import { isPublished, postSlug, relatedPosts } from '../lib/blog';
 import { getCollection } from 'astro:content';
-import { APP_NAME, SITE_URL } from '../consts';
+import { APP_NAME, PRODUCT_LOGO, SITE_URL } from '../consts';
 
 type Props = CollectionEntry<'blog'>['data'] & {
 	readingTime?: number;
@@ -115,7 +115,7 @@ const jsonLd = {
 			<footer class="mt-24 pt-12 border-t border-[var(--border-subtle)] flex flex-col md:flex-row items-center justify-between gap-8">
 				<div class="flex items-center gap-4">
 					<div class="w-12 h-12 rounded-full flex items-center justify-center overflow-hidden border border-[var(--border-subtle)]">
-						<img src="/logo.png" alt={APP_NAME} class="w-8 h-8 object-contain" width="32" height="32" />
+						<img src={PRODUCT_LOGO} alt={APP_NAME} class="w-8 h-8 object-contain" width="32" height="32" />
 					</div>
 					<div>
 						<p class="text-[10px] uppercase tracking-widest font-black text-[var(--text-muted)]">Written by</p>

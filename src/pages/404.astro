@@ -1,6 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { APP_NAME } from '../consts';
+import { APP_NAME, PRODUCT_LOGO } from '../consts';
 ---
 
 <BaseLayout 
@@ -16,7 +16,7 @@ import { APP_NAME } from '../consts';
             <div class="mb-12 relative inline-block">
                 <span class="serif text-[120px] md:text-[180px] leading-none text-white/5 font-bold select-none">404</span>
                 <div class="absolute inset-0 flex items-center justify-center">
-                    <img src="/logo.png" alt={APP_NAME} class="w-20 h-20 md:w-24 md:h-24 object-contain transform -rotate-6" width="96" height="96" />
+                    <img src={PRODUCT_LOGO} alt={APP_NAME} class="w-20 h-20 md:w-24 md:h-24 object-contain transform -rotate-6" width="96" height="96" />
                 </div>
             </div>
 
