@@ -2,7 +2,7 @@
 title: "Add Sound Effects to Silent Reels on Your Phone"
 description: "Silent video sound effects on iPhone — add whooshes, impacts, and stings to Reels on your phone without scrubbing a CapCut timeline for 45 minutes."
 pubDate: 2026-07-04
-draft: true
+draft: false
 heroImage: "/screenshots/step-generate.png"
 tags: ["Instagram Reels", "iPhone video editing", "sound effects", "CapCut", "silent video"]
 ---
