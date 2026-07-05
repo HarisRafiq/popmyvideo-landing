@@ -2,7 +2,7 @@
 title: "Make Your Reels Pop Without Hours in CapCut or After Effects"
 description: "Manual Reels editing vs AI auto-effects — real time costs, what actually changes on screen, and when each path is worth it."
 pubDate: 2026-06-18
-heroImage: "/screenshots/step-generate.png"
+heroImage: "/screenshots/step-regenerate.png"
 tags: ["Instagram Reels", "CapCut", "After Effects", "video VFX", "short-form video"]
 ---
 

@@ -42,6 +42,10 @@ const jsonLd = {
     description={description}
     image={heroImage}
     keywords={tags?.join(", ")}
+    ogType="article"
+    publishedTime={pubDate}
+    modifiedTime={updatedDate}
+    articleTags={tags}
 >
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
 

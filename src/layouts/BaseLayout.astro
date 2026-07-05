@@ -12,15 +12,39 @@ interface Props {
 	image?: string;
 	keywords?: string;
 	robots?: string;
+	ogType?: 'website' | 'article';
+	publishedTime?: Date;
+	modifiedTime?: Date;
+	articleTags?: string[];
 }
 
-const { title = SITE_TITLE, description = SITE_DESCRIPTION, image, keywords, robots } = Astro.props;
+const {
+	title = SITE_TITLE,
+	description = SITE_DESCRIPTION,
+	image,
+	keywords,
+	robots,
+	ogType,
+	publishedTime,
+	modifiedTime,
+	articleTags,
+} = Astro.props;
 ---
 
 <!doctype html>
 <html lang="en">
 	<head>
-		<BaseHead title={title} description={description} image={image} keywords={keywords} robots={robots} />
+		<BaseHead
+			title={title}
+			description={description}
+			image={image}
+			keywords={keywords}
+			robots={robots}
+			ogType={ogType}
+			publishedTime={publishedTime}
+			modifiedTime={modifiedTime}
+			articleTags={articleTags}
+		/>
 	</head>
 	<body class="min-h-screen studio-dark">
 		<nav class="sticky top-0 z-30 nav-glass">
