@@ -4,6 +4,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import BrandLogo from '../components/BrandLogo.astro';
 import StoreCta from '../components/StoreCta.astro';
 import { isPublished, postSlug } from '../lib/blog';
+import { USE_CASES } from '../lib/useCases';
 import { PLAY_STORE_URL, APP_STORE_URL, APP_NAME, SITE_DESCRIPTION, SITE_URL, DEVELOPER_NAME } from '../consts';
 
 const siteUrl = SITE_URL;
@@ -16,33 +17,45 @@ const latestPost = (await getCollection('blog'))
 const features = [
 	{
 		title: 'Auto captions',
-		body: 'Animated text hooks, labels, and callouts that pop in at the right time — readable on mute, punchy with sound.',
+		body: 'Animated text synced to your voice — not boring burned-in subtitles.',
 		icon: 'caption',
 		accent: 'warm',
 	},
 	{
+		title: 'Text overlays',
+		body: 'CTAs, labels, lower-thirds in negative space.',
+		icon: 'overlay',
+		accent: 'cool',
+	},
+	{
 		title: 'Motion graphics',
-		body: 'Arrows, checkmarks, lower-thirds, highlights, and shapes — timed and animated, not static stickers.',
+		body: 'Arrows, checkmarks, panels, kinetic type.',
 		icon: 'motion',
 		accent: 'cool',
 	},
 	{
-		title: 'AI video effects',
-		body: 'Confetti, sparks, bursts, and more — layered on your clip and synced to the action.',
+		title: 'Video effects',
+		body: 'Bursts, sparks, confetti timed to the action.',
 		icon: 'fx',
 		accent: 'purple',
 	},
 	{
-		title: 'AI sound effects',
-		body: 'Impacts, whooshes, and stings that land on beat — great for silent clips that need energy.',
+		title: 'Sound effects',
+		body: 'Impacts and stings for silent or flat clips.',
 		icon: 'sound',
 		accent: 'emerald',
 	},
 	{
 		title: 'Smart timing',
-		body: 'Speech and beats help every caption, graphic, and effect land naturally — no keyframes required.',
+		body: 'Speech and beats drive when everything lands.',
 		icon: 'timing',
 		accent: 'warm',
+	},
+	{
+		title: 'One-clip workflow',
+		body: 'No multi-track timeline.',
+		icon: 'workflow',
+		accent: 'purple',
 	},
 ];
 
@@ -50,25 +63,25 @@ const steps = [
 	{
 		n: '1',
 		title: 'Import',
-		tag: 'DROP IN',
+		tag: 'IMPORT',
 		tagVariant: 'pink',
-		desc: 'Drop a clip from your camera roll or combine a few shots.',
+		desc: 'Any clip from your gallery or files.',
 		image: '/screenshots/step-import.png',
 	},
 	{
 		n: '2',
-		title: 'AI analyzes & generates',
-		tag: 'AI VFX',
+		title: 'Analyze',
+		tag: 'ANALYZE',
 		tagVariant: 'purple',
-		desc: 'Captions, motion graphics, VFX, and SFX — synced to your footage automatically.',
+		desc: 'Reads visuals, audio, or both. Finds the moments worth enhancing.',
 		image: '/screenshots/step-generate.png',
 	},
 	{
 		n: '3',
-		title: 'Regenerate',
-		tag: 'REGENERATE',
+		title: 'Preview',
+		tag: 'PREVIEW',
 		tagVariant: 'purple',
-		desc: 'Pick v1–v10. Tweak prompts until the vibe is right.',
+		desc: 'Captions, graphics, and effects land on time. Change any moment.',
 		image: '/screenshots/step-regenerate.png',
 	},
 	{
@@ -76,18 +89,16 @@ const steps = [
 		title: 'Export',
 		tag: 'EXPORT',
 		tagVariant: 'pink',
-		desc: 'Save a polished MP4 to your gallery or share straight to social.',
+		desc: 'MP4 ready for Reels, TikTok, Shorts, or ads.',
 		image: '/screenshots/step-export.png',
 	},
 ];
 
-const useCases = [
-	'YouTube documentaries and long-form clips',
-	'TikTok Reels, Instagram Reels & YouTube Shorts',
-	'Phone footage, POV, and talking-head clips',
-	'Product demos, B-roll, and social ads',
-	'Silent videos that need captions and energy',
-	'Any clip — from documentary to 15-second Reel',
+const trustNot = [
+	'Not AI video generation — your pixels stay yours.',
+	'Not static stickers — everything is animated and timed.',
+	'Not a full editor — no timeline maze.',
+	'Not a podcast clipper — bring the clip you\'ve already cut; we add the polish.',
 ];
 
 const pricingTiers = [
@@ -95,8 +106,8 @@ const pricingTiers = [
 		name: 'Free',
 		price: '$0',
 		period: '',
-		effects: 'Limited effects each month',
-		desc: 'Try auto captions, motion graphics, and AI effects on your clips.',
+		effects: 'Limited effects / month',
+		desc: 'Try auto captions, motion graphics, and effects on your clips.',
 		highlight: false,
 	},
 	{
@@ -119,32 +130,28 @@ const pricingTiers = [
 
 const faqs = [
 	{
-		q: 'Is PopMyVideo just stickers on top of my video?',
-		a: 'No. Stickers sit still. PopMyVideo builds animated, timed graphics — captions, arrows, lower-thirds, and effects — synced to what\'s happening in your clip.',
+		q: 'Does PopMyVideo work on silent videos?',
+		a: 'Yes. The app reads visuals and can add text overlays, motion graphics, and sound effects even when there\'s no audio track.',
 	},
 	{
-		q: 'Does AI replace or restyle my footage?',
-		a: 'Never. Your pixels stay yours. We layer captions, motion graphics, VFX, and SFX on top of your original video — we never regenerate or restyle your footage.',
+		q: 'Does it replace CapCut or Descript?',
+		a: 'No. CapCut is a full editor with templates and timelines. Descript edits long-form by transcript. PopMyVideo polishes one clip end-to-end with timed captions, effects, and sound — no timeline to learn.',
 	},
 	{
-		q: 'What happens to my video files?',
-		a: 'Your full video file stays on your device. To generate effects, we send compressed storyboard frames and audio from the selected window — not your entire library. Processing data is deleted after the job completes.',
+		q: 'Will it find viral moments in my podcast?',
+		a: 'Not today. Import a short clip you\'ve already exported. PopMyVideo adds captions, graphics, and effects on top.',
 	},
 	{
-		q: 'What are "effects" in subscriptions?',
-		a: 'AI features use effects — one effect per visual generation or sound generation. Free includes a limited number each month. Creator gives you 50/month ($9.99). Pro gives you 250/month ($29.99).',
+		q: 'Does it regenerate my video with AI?',
+		a: 'No. Your original footage is never restyled. We add animated overlays and sound on top.',
+	},
+	{
+		q: 'What do I need to use it?',
+		a: 'iOS or Android, internet for AI features, and a free account (email sign-in).',
 	},
 	{
 		q: 'How do I cancel my subscription?',
 		a: 'Payment is charged to your Google Play or Apple App Store account. Subscriptions renew automatically unless canceled at least 24 hours before the end of the current period. Manage or cancel in Google Play → Payments & subscriptions (Android) or Settings → Apple ID → Subscriptions (iOS).',
-	},
-	{
-		q: 'What do I need to use PopMyVideo?',
-		a: 'An internet connection for AI generation and an account (email sign-in). PopMyVideo is available on Android and iOS.',
-	},
-	{
-		q: 'What kind of videos work?',
-		a: 'Any video — from a YouTube documentary clip to a TikTok Reel. Product demos, talking-head clips, B-roll, travel, gym, cooking, silent footage. If it has action, speech, or movement, PopMyVideo can polish it.',
 	},
 ];
 
@@ -188,10 +195,10 @@ const jsonLd = {
 ---
 
 <BaseLayout
-	title={`${APP_NAME} — Auto Captions & AI Effects for Reels & Shorts | Zero Edit`}
+	title={`${APP_NAME} — Auto Captions & Video Effects for Reels`}
 	description={SITE_DESCRIPTION}
 	image="/screenshots/step-generate.png"
-	keywords="PopMyVideo, auto captions, Reels editor, Shorts editor, TikTok editor, AI video effects, motion graphics, no edit video app, phone video editor, AI sound effects"
+	keywords="auto captions, video effects, text overlay video, add captions to video, reels editor, animated captions, product video, podcast clips social media"
 >
 	<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
 
@@ -207,41 +214,44 @@ const jsonLd = {
 				<span class="brand-burst__shard brand-burst__shard--4"></span>
 			</div>
 
-			<div class="relative max-w-6xl mx-auto px-6 pt-10 md:pt-16 pb-16 md:pb-24">
+			<div class="relative max-w-6xl mx-auto px-6 pt-10 md:pt-16 pb-10 md:pb-14">
 				<div class="grid lg:grid-cols-2 gap-10 lg:gap-14 items-center">
 					<div class="fade-up text-center lg:text-left order-2 lg:order-1">
 						<div class="inline-flex items-center gap-2 product-pill mb-6">
 							<span class="live-dot" aria-hidden="true"></span>
-							Now on Android & iOS
+							Download free — iOS &amp; Android
 						</div>
 
 						<h1 class="display text-[2.5rem] sm:text-5xl lg:text-[3.75rem] leading-[1.05] tracking-tight text-[var(--text-main)] mb-5">
-							Drop your video.<br />
-							<span class="gradient-text">Zero edit. More likes.</span>
+							Your clip is done filming.<br />
+							<span class="gradient-text">It's not done posting.</span>
 						</h1>
 
-						<p class="text-[var(--text-muted)] text-lg md:text-xl leading-relaxed max-w-lg mx-auto lg:mx-0 mb-4">
-							{APP_NAME} turns any video into scroll-stopping content — from YouTube documentaries to TikTok Reels. Auto captions, motion graphics, and AI effects synced to your footage.
+						<p class="text-[var(--text-muted)] text-lg md:text-xl leading-relaxed max-w-lg mx-auto lg:mx-0 mb-8">
+							{APP_NAME} adds auto captions, motion graphics, video effects, and sound — timed to what's in your video. Import one clip, export a finished Reel, Short, or ad.
 						</p>
 
-						<p class="text-[var(--text-main)] font-semibold text-base mb-8 max-w-lg mx-auto lg:mx-0">
-							For people who hate editing but still want more views.
-						</p>
+						<StoreCta class="mx-auto lg:mx-0 mb-4" />
 
-						<StoreCta class="mx-auto lg:mx-0 mb-5" />
+						<p class="mb-6">
+							<a href="#use-cases" class="inline-flex items-center gap-1.5 text-sm font-semibold text-[var(--accent-cool)] hover:text-[var(--text-main)] transition-colors">
+								See what it makes
+								<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+							</a>
+						</p>
 
 						<ul class="trust-list">
 							<li>
 								<svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
-								No timeline required
+								Your footage stays yours
 							</li>
 							<li>
 								<svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
-								Video stays on your phone
+								No timeline
 							</li>
 							<li>
 								<svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
-								Your pixels never regenerated
+								Export in minutes
 							</li>
 						</ul>
 					</div>
@@ -250,14 +260,14 @@ const jsonLd = {
 						<div class="hero-phone-stack">
 							<div class="before-after-slider" data-before-after>
 								<div class="before-after-slider__labels">
-									<span class="before-after-slider__label before-after-slider__label--before">You shoot</span>
-									<span class="before-after-slider__label before-after-slider__label--after">AI polish</span>
+									<span class="before-after-slider__label before-after-slider__label--before">Raw clip</span>
+									<span class="before-after-slider__label before-after-slider__label--after">Post-ready</span>
 								</div>
 								<div class="phone-frame">
 									<div class="phone-frame__inner before-after-slider__frame">
 										<img
 											src="/screenshots/step-generate.png"
-											alt="Polished clip with auto captions and AI effects"
+											alt="Polished clip with auto captions and video effects"
 											width={screenshotDims.width}
 											height={screenshotDims.height}
 											class="before-after-slider__img before-after-slider__img--before"
@@ -267,7 +277,7 @@ const jsonLd = {
 										<div class="before-after-slider__after">
 											<img
 												src="/screenshots/step-import.png"
-												alt="Raw phone clip before PopMyVideo editing"
+												alt="Raw phone clip before PopMyVideo"
 												width={screenshotDims.width}
 												height={screenshotDims.height}
 												class="before-after-slider__img"
@@ -292,104 +302,45 @@ const jsonLd = {
 			</div>
 		</section>
 
-		<!-- Platform strip -->
-		<section class="platform-strip" aria-label="Works with any video format">
+		<!-- Social proof strip -->
+		<section class="platform-strip" aria-label="Product highlights">
 			<div class="max-w-6xl mx-auto px-6 py-5">
-				<div class="platform-strip__inner">
-					<span class="platform-strip__label">Any video</span>
-					<div class="platform-strip__platforms">
-						<span>YouTube documentaries</span>
-						<span class="platform-strip__dot" aria-hidden="true">→</span>
-						<span>TikTok Reels</span>
-						<span class="platform-strip__dot" aria-hidden="true">·</span>
-						<span>Instagram Reels</span>
-						<span class="platform-strip__dot" aria-hidden="true">·</span>
-						<span>YouTube Shorts</span>
-					</div>
+				<div class="platform-strip__inner platform-strip__inner--center">
+					<span>Your footage stays yours</span>
+					<span class="platform-strip__dot" aria-hidden="true">·</span>
+					<span>No timeline</span>
+					<span class="platform-strip__dot" aria-hidden="true">·</span>
+					<span>Export in minutes</span>
 				</div>
 			</div>
 		</section>
 
-		<!-- Problem → Solution -->
-		<section class="border-t border-[var(--border-subtle)]">
-			<div class="max-w-6xl mx-auto px-6 py-16 md:py-24">
-				<div class="grid md:grid-cols-2 gap-12 md:gap-16 items-center">
-					<div class="fade-up reveal">
-						<p class="section-eyebrow">The problem</p>
-						<h2 class="display text-3xl md:text-4xl lg:text-[2.75rem] text-[var(--text-main)] leading-tight mb-5">
-							You film it.<br />
-							<span class="text-[var(--text-muted)]">You never post it.</span>
-						</h2>
-						<p class="text-[var(--text-muted)] leading-relaxed mb-6">
-							Great footage stuck on your camera roll because editing takes forever. Timelines, keyframes, caption placement, effect hunting — hours you don't have.
-						</p>
-						<p class="text-[var(--text-main)] font-semibold leading-relaxed">
-							{APP_NAME} skips all of it. Drop your clip, describe the vibe, export a finished Reel in minutes.
-						</p>
-					</div>
-					<div class="fade-up reveal grid grid-cols-2 gap-4" style="animation-delay: 0.1s">
-						<div class="pain-card">
-							<span class="pain-card__icon pain-card__icon--bad" aria-hidden="true">✕</span>
-							<p class="pain-card__title">Traditional editors</p>
-							<p class="pain-card__body">Timelines, keyframes, manual caption placement</p>
-						</div>
-						<div class="pain-card pain-card--good">
-							<span class="pain-card__icon pain-card__icon--good" aria-hidden="true">✓</span>
-							<p class="pain-card__title">{APP_NAME}</p>
-							<p class="pain-card__body">Drop, prompt, export — effects timed to your clip</p>
-						</div>
-						<div class="pain-card">
-							<span class="pain-card__icon pain-card__icon--bad" aria-hidden="true">✕</span>
-							<p class="pain-card__title">Static stickers</p>
-							<p class="pain-card__body">Graphics that sit still and look generic</p>
-						</div>
-						<div class="pain-card pain-card--good">
-							<span class="pain-card__icon pain-card__icon--good" aria-hidden="true">✓</span>
-							<p class="pain-card__title">Timed motion graphics</p>
-							<p class="pain-card__body">Animated captions and effects synced to the action</p>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
-
-		<!-- Features bento -->
-		<section id="features" class="border-t border-[var(--border-subtle)] bg-[var(--studio-bg-mid)]">
+		<!-- Use cases -->
+		<section id="use-cases" class="border-t border-[var(--border-subtle)] bg-[var(--studio-bg-mid)]">
 			<div class="max-w-6xl mx-auto px-6 py-16 md:py-24">
 				<div class="text-center max-w-2xl mx-auto mb-12 md:mb-16 fade-up reveal">
-					<p class="section-eyebrow">What you get</p>
+					<p class="section-eyebrow">Use cases</p>
 					<h2 class="display text-3xl md:text-4xl lg:text-[2.75rem] text-[var(--text-main)] leading-tight">
-						Pro polish.<br />
-						<span class="gradient-text">Zero timeline.</span>
+						One engine. Different clips.<br />
+						<span class="gradient-text">Same polish.</span>
 					</h2>
-					<p class="text-[var(--text-muted)] mt-4 leading-relaxed">
-						Everything a scroll-stopping Reel needs — captions, graphics, effects, and sound — layered automatically on your original footage.
-					</p>
 				</div>
 
-				<div class="bento-grid bento-grid--5">
+				<div class="use-case-grid fade-up reveal">
 					{
-						features.map((f, i) => (
-							<article class={`bento-card bento-card--${f.accent} fade-up reveal`} style={`animation-delay: ${i * 0.06}s`}>
-								<div class="bento-card__icon" aria-hidden="true">
-									{f.icon === 'caption' && (
-										<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"/></svg>
-									)}
-									{f.icon === 'motion' && (
-										<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
-									)}
-									{f.icon === 'fx' && (
-										<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/></svg>
-									)}
-									{f.icon === 'sound' && (
-										<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"/></svg>
-									)}
-									{f.icon === 'timing' && (
-										<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-									)}
+						USE_CASES.map((uc) => (
+							<article class="use-case-card">
+								<h3 class="use-case-card__title">{uc.headline}</h3>
+								<p class="use-case-card__body">{uc.body}</p>
+								<div class="use-case-card__before-after">
+									<p><span class="use-case-card__label">Before</span> {uc.before}</p>
+									<p><span class="use-case-card__label">After</span> {uc.after}</p>
 								</div>
-								<h3 class="bento-card__title">{f.title}</h3>
-								<p class="bento-card__body">{f.body}</p>
+								{uc.note && <p class="use-case-card__note">{uc.note}</p>}
+								<a href={`/for/${uc.slug}/`} class="use-case-card__link">
+									Learn more
+									<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M17 8l4 4m0 0l-4 4m4-4H7"/></svg>
+								</a>
 							</article>
 						))
 					}
@@ -403,8 +354,7 @@ const jsonLd = {
 				<div class="text-center max-w-2xl mx-auto mb-10 md:mb-14 fade-up reveal">
 					<p class="section-eyebrow">How it works</p>
 					<h2 class="display text-3xl md:text-4xl lg:text-[2.75rem] text-[var(--text-main)] leading-tight">
-						Four steps.<br />
-						<span class="text-[var(--text-muted)]">Not four hours.</span>
+						How it works
 					</h2>
 				</div>
 
@@ -455,68 +405,74 @@ const jsonLd = {
 			</div>
 		</section>
 
-		<!-- Use cases -->
-		<section id="use-cases" class="border-t border-[var(--border-subtle)] bg-[var(--studio-bg-mid)]">
+		<!-- Features bento -->
+		<section id="features" class="border-t border-[var(--border-subtle)] bg-[var(--studio-bg-mid)]">
 			<div class="max-w-6xl mx-auto px-6 py-16 md:py-24">
-				<div class="grid lg:grid-cols-5 gap-10 lg:gap-14 items-start">
-					<div class="lg:col-span-2 fade-up reveal">
-						<p class="section-eyebrow">Great for</p>
-						<h2 class="display text-3xl md:text-4xl text-[var(--text-main)] leading-tight mb-4">
-							Documentary<br />
-							<span class="text-[var(--text-muted)]">to TikTok Reel.</span>
-						</h2>
-						<p class="text-[var(--text-muted)] leading-relaxed">
-							Long-form YouTube clip or 15-second phone video — {APP_NAME} polishes any footage. Drop it in, describe the vibe, export something worth posting.
-						</p>
-					</div>
+				<div class="text-center max-w-2xl mx-auto mb-12 md:mb-16 fade-up reveal">
+					<p class="section-eyebrow">What you get</p>
+					<h2 class="display text-3xl md:text-4xl lg:text-[2.75rem] text-[var(--text-main)] leading-tight">
+						Pro polish.<br />
+						<span class="gradient-text">Zero timeline.</span>
+					</h2>
+					<p class="text-[var(--text-muted)] mt-4 leading-relaxed">
+						Captions, text overlays, motion graphics, effects, and sound — timed to speech or action on your original footage.
+					</p>
+				</div>
 
-					<ul class="lg:col-span-3 use-case-list fade-up reveal" style="animation-delay: 0.08s">
-						{
-							useCases.map((item) => (
-								<li class="use-case-list__item">
-									<svg class="w-4 h-4 text-[var(--brand-cyan)] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
-									{item}
-								</li>
-							))
-						}
-					</ul>
+				<div class="bento-grid bento-grid--7">
+					{
+						features.map((f, i) => (
+							<article class={`bento-card bento-card--${f.accent} fade-up reveal`} style={`animation-delay: ${i * 0.06}s`}>
+								<div class="bento-card__icon" aria-hidden="true">
+									{f.icon === 'caption' && (
+										<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"/></svg>
+									)}
+									{f.icon === 'overlay' && (
+										<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7"/></svg>
+									)}
+									{f.icon === 'motion' && (
+										<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+									)}
+									{f.icon === 'fx' && (
+										<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/></svg>
+									)}
+									{f.icon === 'sound' && (
+										<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"/></svg>
+									)}
+									{f.icon === 'timing' && (
+										<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+									)}
+									{f.icon === 'workflow' && (
+										<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
+									)}
+								</div>
+								<h3 class="bento-card__title">{f.title}</h3>
+								<p class="bento-card__body">{f.body}</p>
+							</article>
+						))
+					}
 				</div>
 			</div>
 		</section>
 
-		<!-- Differentiation -->
+		<!-- What it's not -->
 		<section id="differentiation" class="border-t border-[var(--border-subtle)]">
 			<div class="max-w-6xl mx-auto px-6 py-16 md:py-24">
 				<div class="text-center max-w-2xl mx-auto mb-12 md:mb-16 fade-up reveal">
-					<p class="section-eyebrow">Not stickers. Not AI regeneration.</p>
+					<p class="section-eyebrow">What it's not</p>
 					<h2 class="display text-3xl md:text-4xl lg:text-[2.75rem] text-[var(--text-main)] leading-tight">
-						Your footage.<br />
-						<span class="gradient-text">Enhanced, never replaced.</span>
+						Honest about<br />
+						<span class="text-[var(--text-muted)]">what we do.</span>
 					</h2>
 				</div>
 
-				<div class="diff-grid fade-up reveal">
-					<article class="diff-card">
-						<div class="diff-card__icon diff-card__icon--no" aria-hidden="true">✕</div>
-						<h3 class="diff-card__title">Static stickers</h3>
-						<p class="diff-card__body">Sit still on top of your clip. Same look as everyone else. No timing, no animation, no sync to the action.</p>
-					</article>
-					<article class="diff-card diff-card--highlight">
-						<div class="diff-card__icon diff-card__icon--yes" aria-hidden="true">✓</div>
-						<h3 class="diff-card__title">{APP_NAME} motion graphics</h3>
-						<p class="diff-card__body">Animated, timed graphics built on top of your clip — captions, arrows, and effects that land exactly when they should.</p>
-					</article>
-					<article class="diff-card">
-						<div class="diff-card__icon diff-card__icon--no" aria-hidden="true">✕</div>
-						<h3 class="diff-card__title">AI video regeneration</h3>
-						<p class="diff-card__body">Restyles or replaces your footage entirely. You lose the authentic look of what you actually filmed.</p>
-					</article>
-					<article class="diff-card diff-card--highlight">
-						<div class="diff-card__icon diff-card__icon--yes" aria-hidden="true">✓</div>
-						<h3 class="diff-card__title">Your pixels stay yours</h3>
-						<p class="diff-card__body">We never restyle or regenerate your footage. Polish layers on top — your original video stays intact.</p>
-					</article>
-				</div>
+				<ul class="trust-not-list fade-up reveal">
+					{
+						trustNot.map((line) => (
+							<li class="trust-not-list__item">{line}</li>
+						))
+					}
+				</ul>
 			</div>
 		</section>
 
@@ -524,14 +480,11 @@ const jsonLd = {
 		<section id="pricing" class="border-t border-[var(--border-subtle)] bg-[var(--studio-bg-mid)]">
 			<div class="max-w-6xl mx-auto px-6 py-16 md:py-24">
 				<div class="text-center max-w-2xl mx-auto mb-12 md:mb-16 fade-up reveal">
-					<p class="section-eyebrow">Subscriptions & effects</p>
+					<p class="section-eyebrow">Pricing</p>
 					<h2 class="display text-3xl md:text-4xl lg:text-[2.75rem] text-[var(--text-main)] leading-tight">
 						Start free.<br />
 						<span class="text-[var(--text-muted)]">Scale when you're ready.</span>
 					</h2>
-					<p class="text-[var(--text-muted)] mt-4 leading-relaxed">
-						AI features use <strong class="text-[var(--text-main)] font-semibold">effects</strong> — one effect per visual generation or sound generation.
-					</p>
 				</div>
 
 				<div class="pricing-grid fade-up reveal">
@@ -552,7 +505,11 @@ const jsonLd = {
 				</div>
 
 				<p class="pricing-note fade-up reveal">
-					Payment is charged to your Google Play account. Subscriptions renew automatically unless canceled at least 24 hours before the end of the current period. Manage or cancel in Google Play → Payments &amp; subscriptions. See our <a href="/terms/">Terms of Use</a> and <a href="/privacy/">Privacy Policy</a>.
+					One effect = one visual generation or one sound generation. Shot analysis included on paid plans.
+				</p>
+
+				<p class="pricing-note fade-up reveal">
+					Payment is charged to your Google Play or Apple App Store account. Subscriptions renew automatically unless canceled at least 24 hours before the end of the current period. Manage or cancel in Google Play → Payments &amp; subscriptions (Android) or Settings → Apple ID → Subscriptions (iOS). See our <a href="/terms/">Terms of Use</a> and <a href="/privacy/">Privacy Policy</a>.
 				</p>
 
 				<div class="text-center mt-10 fade-up reveal">
@@ -570,27 +527,27 @@ const jsonLd = {
 						<div>
 							<p class="section-eyebrow">Privacy</p>
 							<h2 class="display text-2xl md:text-3xl text-[var(--text-main)] leading-tight mb-4">
-								Your video stays on your device.
+								Effects render on your phone.
 							</h2>
-							<p class="text-[var(--text-muted)] leading-relaxed mb-4">
-								To generate effects, we send compressed storyboard frames and audio from the selected window — not your entire library. Processing data is deleted after the job completes.
+							<p class="text-[var(--text-muted)] leading-relaxed">
+								We don't re-encode your clip in the cloud. AI returns animation code — captions, graphics, and effects as a lightweight spec — and your phone composites it onto your footage locally. To build that spec, we send compressed frames and audio from the clip you're editing to third-party AI services; that data is deleted as soon as the job finishes. No project cloud sync.
 							</p>
-							<p class="text-[var(--text-muted)] leading-relaxed text-sm">
-								Project metadata syncs to your account; video files remain local unless you export them. Internet connection required for AI generation. Account required (email sign-in).
+							<p class="text-[var(--text-muted)] leading-relaxed text-sm mt-4">
+								Internet required for AI features. Free account (email sign-in). <a href="/privacy/" class="text-[var(--accent-cool)] hover:text-[var(--text-main)]">Privacy Policy</a>
 							</p>
 						</div>
 						<ul class="privacy-list">
 							<li>
 								<svg class="w-5 h-5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
-								Full video file stays local
+								Full video composited locally
 							</li>
 							<li>
 								<svg class="w-5 h-5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
-								Processing data deleted after each job
+								AI returns code, not a new video
 							</li>
 							<li>
 								<svg class="w-5 h-5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
-								Only compressed frames sent for AI
+								Frames deleted after codegen
 							</li>
 						</ul>
 					</div>
@@ -627,17 +584,17 @@ const jsonLd = {
 					<div class="relative z-10 text-center">
 						<BrandLogo variant="hero" class="mx-auto mb-6" />
 						<h2 class="display text-3xl md:text-5xl text-[var(--text-main)] mb-4 leading-tight">
-							Drop your video.<br />
-							<span class="gradient-text">Zero edit. More likes.</span>
+							Your clip is done filming.<br />
+							<span class="gradient-text">It's not done posting.</span>
 						</h2>
 						<p class="text-[var(--text-muted)] text-lg max-w-md mx-auto mb-8">
-							Download free on Android and iOS. Turn your next clip into a scroll-stopper tonight.
+							Download free on Android and iOS. Import one clip, export a finished Reel tonight.
 						</p>
 
 						<StoreCta centered class="mb-6" />
 
 						<p class="text-[10px] font-bold text-[var(--text-muted)] uppercase tracking-widest">
-							Free tier · Video stays on device · Made by {DEVELOPER_NAME}
+							Free tier · Your footage stays yours · Made by {DEVELOPER_NAME}
 						</p>
 					</div>
 				</div>
@@ -662,7 +619,6 @@ const jsonLd = {
 	</main>
 
 	<script>
-		// Before/after slider
 		document.querySelectorAll<HTMLElement>('[data-before-after]').forEach((root) => {
 			const frame = root.querySelector<HTMLElement>('.before-after-slider__frame');
 			const after = root.querySelector<HTMLElement>('.before-after-slider__after');
@@ -698,7 +654,6 @@ const jsonLd = {
 			frame.addEventListener('click', (e) => positionFromEvent(e.clientX));
 		});
 
-		// Scroll reveal
 		const revealEls = document.querySelectorAll('.reveal');
 		if (revealEls.length && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
 			const observer = new IntersectionObserver(

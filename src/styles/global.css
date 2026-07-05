@@ -872,6 +872,12 @@ body {
     gap: 0.75rem 1rem;
 }
 
+.platform-strip__inner--center {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text-main);
+}
+
 .platform-strip__label {
     font-size: 10px;
     font-weight: 800;
@@ -970,6 +976,26 @@ body {
     .bento-grid--5 .bento-card:nth-child(4),
     .bento-grid--5 .bento-card:nth-child(5) {
         grid-column: span 3;
+    }
+
+    .bento-grid--7 {
+        grid-template-columns: repeat(6, 1fr);
+    }
+
+    .bento-grid--7 .bento-card:nth-child(1),
+    .bento-grid--7 .bento-card:nth-child(2),
+    .bento-grid--7 .bento-card:nth-child(3),
+    .bento-grid--7 .bento-card:nth-child(4) {
+        grid-column: span 2;
+    }
+
+    .bento-grid--7 .bento-card:nth-child(5),
+    .bento-grid--7 .bento-card:nth-child(6) {
+        grid-column: span 3;
+    }
+
+    .bento-grid--7 .bento-card:nth-child(7) {
+        grid-column: span 6;
     }
 }
 
@@ -1174,7 +1200,178 @@ body {
 .step-app-tag--pink { background: var(--brand-pink); }
 .step-app-tag--purple { background: var(--brand-purple); }
 
-/* Use case list */
+/* Use case cards */
+.use-case-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+}
+
+@media (min-width: 768px) {
+    .use-case-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+.use-case-card {
+    padding: 1.75rem;
+    border-radius: 1.25rem;
+    border: 1px solid var(--border-subtle);
+    background: rgba(255, 255, 255, 0.02);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    transition: border-color 0.2s;
+}
+
+.use-case-card:hover {
+    border-color: rgba(255, 255, 255, 0.14);
+}
+
+.use-case-card__title {
+    font-family: 'Bebas Neue', 'Outfit', sans-serif;
+    font-size: 1.5rem;
+    letter-spacing: 0.02em;
+    color: var(--text-main);
+    line-height: 1.2;
+}
+
+.use-case-card__body {
+    font-size: 0.9375rem;
+    line-height: 1.6;
+    color: var(--text-muted);
+    flex: 1;
+}
+
+.use-case-card__before-after {
+    font-size: 0.8125rem;
+    line-height: 1.5;
+    color: var(--text-muted);
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding-top: 0.5rem;
+    border-top: 1px solid var(--border-subtle);
+}
+
+.use-case-card__label {
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent-cool);
+    margin-right: 0.35rem;
+}
+
+.use-case-card__note {
+    font-size: 0.8125rem;
+    font-style: italic;
+    color: var(--text-muted);
+}
+
+.use-case-card__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 0.8125rem;
+    font-weight: 700;
+    color: var(--accent-cool);
+    transition: gap 0.2s, color 0.2s;
+}
+
+.use-case-card__link:hover {
+    gap: 0.6rem;
+    color: var(--text-main);
+}
+
+/* What it's not */
+.trust-not-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 auto;
+    max-width: 36rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.trust-not-list__item {
+    padding: 1.25rem 1.5rem;
+    border-radius: 1rem;
+    border: 1px solid var(--border-subtle);
+    background: rgba(255, 255, 255, 0.02);
+    font-size: 1rem;
+    line-height: 1.5;
+    color: var(--text-main);
+}
+
+/* Category chips */
+.category-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.625rem;
+}
+
+.category-chip {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    border-radius: 9999px;
+    border: 1px solid var(--border-subtle);
+    background: rgba(255, 255, 255, 0.03);
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    transition: border-color 0.2s, color 0.2s, background 0.2s;
+}
+
+.category-chip:hover {
+    border-color: rgba(255, 255, 255, 0.18);
+    color: var(--text-main);
+    background: rgba(255, 255, 255, 0.06);
+}
+
+.category-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+    margin-bottom: 3rem;
+}
+
+@media (min-width: 640px) {
+    .category-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (min-width: 1024px) {
+    .category-grid { grid-template-columns: repeat(4, 1fr); }
+}
+
+.category-grid__item {
+    display: block;
+    padding: 1.25rem;
+    border-radius: 1rem;
+    border: 1px solid var(--border-subtle);
+    background: rgba(255, 255, 255, 0.02);
+    transition: border-color 0.2s, transform 0.2s;
+}
+
+.category-grid__item:hover {
+    border-color: rgba(255, 255, 255, 0.14);
+    transform: translateY(-2px);
+}
+
+.category-grid__title {
+    font-weight: 700;
+    font-size: 0.9375rem;
+    color: var(--text-main);
+    margin-bottom: 0.35rem;
+}
+
+.category-grid__desc {
+    font-size: 0.8125rem;
+    line-height: 1.4;
+    color: var(--text-muted);
+}
+
+/* Use case list (legacy) */
 .use-case-list {
     display: grid;
     grid-template-columns: 1fr;

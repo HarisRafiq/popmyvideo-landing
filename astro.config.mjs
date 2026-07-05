@@ -27,6 +27,12 @@ export default defineConfig({
         if (pathname === '/') {
           return { ...item, lastmod: new Date(), changefreq: 'weekly', priority: 1 };
         }
+        if (pathname.startsWith('/for/')) {
+          return { ...item, changefreq: 'monthly', priority: 0.75 };
+        }
+        if (pathname.startsWith('/blog/category/')) {
+          return { ...item, changefreq: 'monthly', priority: 0.7 };
+        }
         if (pathname === '/blog/') {
           return { ...item, lastmod: new Date(), changefreq: 'weekly', priority: 0.9 };
         }

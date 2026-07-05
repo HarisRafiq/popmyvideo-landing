@@ -21,7 +21,7 @@ import { APP_NAME, DEVELOPER_NAME, ANDROID_PACKAGE_ID } from '../consts';
 
 			<div class="prose-body prose">
 
-				<p class="last-updated"><strong>Last updated:</strong> July 1, 2026</p>
+				<p class="last-updated"><strong>Last updated:</strong> July 5, 2026</p>
 
 				<section>
 					<p><strong>{APP_NAME}</strong> is published by <strong>Cats Build Ltd</strong> trading as <strong>{DEVELOPER_NAME}</strong> ("we", "us", "our"). {APP_NAME} is a mobile video app that helps you turn raw clips into polished social content by adding auto captions, motion graphics, and AI visual and sound effects on top of your footage. This policy describes how we collect, use, and protect your information when you use {APP_NAME} for iOS and Android (<code>{ANDROID_PACKAGE_ID}</code>).</p>
@@ -45,10 +45,10 @@ import { APP_NAME, DEVELOPER_NAME, ANDROID_PACKAGE_ID } from '../consts';
 					<p>When you use the app, you may provide:</p>
 					<ul>
 						<li>Video clips stored on your device</li>
-						<li>Project metadata (timeline structure, effect settings, project names)</li>
+						<li>Project data (effect settings, edits) stored locally on your device</li>
 						<li>Exported videos you choose to save or share</li>
 					</ul>
-					<p>Video files and project timelines remain on your device. We do not store your video library or editor projects on our servers.</p>
+					<p>Video files and projects stay on your device. We do <strong>not</strong> sync projects to the cloud or store your video library on our servers.</p>
 
 					<h3>Photos and videos on your device</h3>
 					<ul>
@@ -58,23 +58,24 @@ import { APP_NAME, DEVELOPER_NAME, ANDROID_PACKAGE_ID } from '../consts';
 					</ul>
 
 					<h3>Cloud AI processing</h3>
-					<p>Your <strong>full video files stay on your device</strong>. We do not upload your entire video library. When you use AI features, we send only derived content from the clip you are editing.</p>
+					<p>Your <strong>full video files and projects stay on your device</strong>. We do not upload your entire video library, re-encode your clip in the cloud, or sync projects to the cloud.</p>
+					<p>When you use AI features, the cloud returns <strong>animation code</strong> — a lightweight effect spec for captions, graphics, and motion — not a regenerated video. Your phone composites that spec onto your footage locally during preview and export.</p>
+					<p>To generate that spec, we send only derived content from the clip you are editing to third-party AI providers:</p>
 
 					<p><strong>What we send</strong></p>
 					<ul>
-						<li>Compressed storyboard frames derived from your video</li>
+						<li>Compressed frames derived from your video</li>
 						<li>Trimmed audio segments from your video</li>
 						<li>Text prompts you enter and technical metadata needed to generate effects</li>
 					</ul>
 
 					<p><strong>Who receives it</strong></p>
 					<ul>
-						<li><strong>Google Gemini (Google LLC)</strong> — receives derived video frames and trimmed audio from your clip for shot analysis, effect planning, and visual effects (VFX) generation</li>
+						<li><strong>Google Gemini (Google LLC)</strong> — receives compressed frames and trimmed audio from your clip for shot analysis, effect planning, and visual effects (VFX) generation</li>
 						<li><strong>fal.ai</strong> — receives <strong>text prompts only</strong> (not your video or audio). Our server sends prompts to fal.ai to generate sound effects. fal.ai may use subprocessors such as ElevenLabs or Lyria</li>
 					</ul>
 
-					<p>Derived video frames and trimmed audio sent to Google Gemini are deleted after processing completes. We do not use your content to train public AI models on your behalf.</p>
-					<p>We may retain <strong>de-identified</strong> prompts, analysis text, and generated effect outputs in a shared technical cache to improve reliability and reduce processing cost. This cache is not linked to your account after you delete your account.</p>
+					<p>Compressed frames, trimmed audio, and other content sent for AI processing are <strong>deleted as soon as processing completes</strong>. We do not retain your video content on our servers after a job finishes. We do not use your content to train public AI models on your behalf.</p>
 					<p><strong>Revoke consent:</strong> Account → <strong>Revoke AI access</strong> clears consent on this device. You stay signed in; cloud AI stops until you agree again on your next AI action.</p>
 
 					<h3>Purchase information</h3>
@@ -132,13 +133,12 @@ import { APP_NAME, DEVELOPER_NAME, ANDROID_PACKAGE_ID } from '../consts';
 
 				<section>
 					<h2>Data retention</h2>
+					<p>We follow a <strong>no-retention</strong> approach for video and AI processing data:</p>
 					<ul>
-						<li><strong>Account data</strong> (email, user id, subscription state) is retained while your account is active.</li>
-						<li><strong>AI pipeline data</strong> tied to your account (generation jobs, shot analyses) is retained while your account is active.</li>
-						<li><strong>Reference images</strong> from your video are deleted after each AI generation completes.</li>
-						<li><strong>De-identified generation cache</strong> (prompts, analysis text, effect outputs without your user id) may be retained after account deletion to operate and improve the service.</li>
-						<li><strong>Usage and billing records</strong> are retained as needed for quota enforcement and legal compliance while your account is active.</li>
-						<li><strong>Video and projects on device</strong> remain under your control; uninstalling the app removes local app data.</li>
+						<li><strong>Compressed frames, trimmed audio, and AI processing payloads</strong> are deleted as soon as each job completes. We do not keep copies on our servers.</li>
+						<li><strong>Video files and projects</strong> remain on your device under your control. We do not sync projects to the cloud. Uninstalling the app removes local app data.</li>
+						<li><strong>Account data</strong> (email, user id, subscription state) is kept only while your account is active so you can sign in and use paid features.</li>
+						<li><strong>Usage records</strong> (effect counts, timestamps for quota enforcement) are kept while your account is active and removed when you delete your account.</li>
 					</ul>
 				</section>
 
@@ -151,7 +151,7 @@ import { APP_NAME, DEVELOPER_NAME, ANDROID_PACKAGE_ID } from '../consts';
 						<li>Request deletion of your account and associated data</li>
 						<li>Withdraw consent where processing is based on consent</li>
 					</ul>
-					<p><strong>Delete your account in the app:</strong> Account → <strong>Delete account &amp; data</strong>. This removes your account, billing linkage, usage history, user-scoped AI data, and reference images from our servers. Local projects on your device are also cleared.</p>
+					<p><strong>Delete your account in the app:</strong> Account → <strong>Delete account &amp; data</strong>. This removes your account, billing linkage, and usage history from our servers. Local projects on your device are also cleared.</p>
 					<p>You can also contact us at the email below for access or deletion requests (for example if you cannot sign in).</p>
 					<p>You can cancel subscriptions anytime in <strong>Settings → Apple ID → Subscriptions</strong> (iOS) or <strong>Google Play → Subscriptions</strong> (Android). Account deletion does not cancel store billing. See our <a href="/terms/#subscriptions">Terms of Use</a> for full subscription terms.</p>
 				</section>

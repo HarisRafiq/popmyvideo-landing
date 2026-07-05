@@ -9,7 +9,7 @@ export const DEVELOPER_NAME = 'ThinkingCats';
 
 export const SITE_TITLE = APP_NAME;
 export const SITE_DESCRIPTION =
-	'Turn any video into scroll-stopping content — from YouTube documentaries to TikTok Reels. Auto captions, motion graphics, and AI effects. No timeline. No editing skills. Free on Android and iOS.';
+	'Add auto captions, text overlays, motion graphics, and video effects to any clip — timed to speech or action. Export Reels, Shorts, and ads. By ThinkingCats.';
 
 export const PRODUCT_LOGO = '/logo.png';
 export const PRODUCT_LOGO_MARK = '/logo-mark.svg';

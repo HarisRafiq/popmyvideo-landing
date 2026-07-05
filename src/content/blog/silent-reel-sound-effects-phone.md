@@ -4,6 +4,7 @@ description: "Silent video sound effects on iPhone — add whooshes, impacts, an
 pubDate: 2026-07-04
 draft: false
 heroImage: "/screenshots/step-generate.png"
+categories: ["silent-video", "video-effects"]
 tags: ["Instagram Reels", "iPhone video editing", "sound effects", "CapCut", "silent video"]
 ---
 
@@ -46,7 +47,7 @@ After Effects does sound design better — layered impacts, custom EQ, sidechain
 
 ## Path B: AI sound effects timed to silent footage
 
-Different workflow: import a silent clip, let software find where the energy spikes, and attach SFX to those moments without building a multi-track timeline.
+Different workflow: import a silent clip, let software find moments worth enhancing, and attach SFX to those moments without building a multi-track timeline.
 
 [PopMyVideo](https://popmyvideo.com) was built for this kind of polish on phone — overlays and accents on your original footage, not a full NLE replacement. For silent clips specifically:
 
@@ -85,7 +86,7 @@ On iPhone, CapCut and PopMyVideo both run on device. No desktop handoff. For sil
 <div class="before-after">
   <figure>
     <img src="/screenshots/step-import.png" alt="PopMyVideo scanning a silent iPhone clip for hook moments" width="468" height="1024" loading="lazy" />
-    <figcaption>Before — finding the moments</figcaption>
+    <figcaption>Before — analyzing the clip</figcaption>
   </figure>
   <figure>
     <img src="/screenshots/step-regenerate.png" alt="Multiple AI polish versions with different sound and effect combinations to choose from" width="468" height="1024" loading="lazy" />
@@ -114,3 +115,9 @@ Silent footage isn't a death sentence. It's a missing layer.
 If you have time and care about a specific SFX pack, CapCut on iPhone gets you there — count on **35–45 minutes** per clip with multiple hits. If the visual is done and you just need silent video sound effects without rebuilding a timeline, import the clip, let AI mark the moments, layer impacts and whooshes on the action, and ship.
 
 Good motion, sound on the hit, posted before you second-guess the silent take. That's the whole fix.
+
+## Related topics
+
+- [Add Sound to Silent Video](/blog/category/silent-video/)
+- [Turn silent footage into a finished ad](/for/silent-broll-ad/)
+- [Make Your Reels Pop Without Hours in CapCut or After Effects](/blog/make-reels-pop-without-capcut-after-effects/)

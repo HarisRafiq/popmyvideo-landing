@@ -1,0 +1,140 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import FormattedDate from '../../../components/FormattedDate.astro';
+import StoreCta from '../../../components/StoreCta.astro';
+import { CATEGORIES, getCategoryBySlug } from '../../../lib/categories';
+import { getUseCaseBySlug } from '../../../lib/useCases';
+import { isPublished, postSlug, postsInCategory, readingTimeMinutes } from '../../../lib/blog';
+import { APP_NAME, SITE_URL } from '../../../consts';
+
+export function getStaticPaths() {
+	return CATEGORIES.map((cat) => ({ params: { slug: cat.slug } }));
+}
+
+const { slug } = Astro.params;
+const category = getCategoryBySlug(slug!);
+
+if (!category) {
+	return Astro.redirect('/404');
+}
+
+const allPosts = await getCollection('blog');
+const posts = postsInCategory(allPosts, category.slug);
+const relatedUseCase = category.relatedUseCase ? getUseCaseBySlug(category.relatedUseCase) : undefined;
+
+const siteUrl = SITE_URL;
+const pageUrl = `${siteUrl}/blog/category/${category.slug}/`;
+
+const jsonLd = {
+	'@context': 'https://schema.org',
+	'@type': 'CollectionPage',
+	name: category.title,
+	description: category.description,
+	url: pageUrl,
+	mainEntity: {
+		'@type': 'ItemList',
+		itemListElement: posts.map((post, i) => ({
+			'@type': 'ListItem',
+			position: i + 1,
+			url: `${siteUrl}/blog/${postSlug(post.id)}/`,
+			name: post.data.title,
+		})),
+	},
+};
+---
+
+<BaseLayout
+	title={`${category.title} | ${APP_NAME} Blog`}
+	description={category.description}
+	keywords={category.keywords.join(', ')}
+>
+	<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+
+	<main class="max-w-7xl mx-auto px-6 py-12 md:py-24 relative z-10">
+		<header class="mb-12 md:mb-16 fade-up max-w-3xl">
+			<p class="text-[var(--accent-warm)] uppercase tracking-[0.4em] text-[10px] md:text-[11px] font-black mb-4">
+				<a href="/blog/" class="hover:text-[var(--text-main)] transition-colors">Blog</a>
+				<span class="mx-2 opacity-40">/</span>
+				Topic
+			</p>
+			<h1 class="serif text-4xl md:text-6xl text-[var(--text-main)] mb-6 leading-tight">
+				{category.title}
+			</h1>
+			<p class="text-[var(--text-muted)] text-lg md:text-xl leading-relaxed">
+				{category.intro}
+			</p>
+		</header>
+
+		{
+			relatedUseCase && (
+				<section class="mb-12 fade-up">
+					<a href={`/for/${relatedUseCase.slug}/`} class="block glass-card p-6 md:p-8 hover:border-white/15 transition-colors group">
+						<p class="text-[10px] font-bold uppercase tracking-widest text-[var(--accent-cool)] mb-2">Use case</p>
+						<p class="serif text-xl md:text-2xl text-[var(--text-main)] group-hover:text-[var(--accent-cool)] transition-colors">{relatedUseCase.headline}</p>
+					</a>
+				</section>
+			)
+		}
+
+		{
+			posts.length === 0 ? (
+				<section class="fade-up glass-card p-12 text-center max-w-2xl">
+					<p class="text-[var(--text-muted)] text-lg mb-4">Guides for this topic are on the way.</p>
+					<a href="/blog/" class="text-sm font-semibold text-[var(--accent-cool)] hover:text-[var(--text-main)] transition-colors">Browse all articles →</a>
+				</section>
+			) : (
+				<section class="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 fade-up">
+					{
+						posts.map((post, index) => (
+							<article class="group" style={`animation-delay: ${0.1 * (index + 1)}s`}>
+								<a href={`/blog/${postSlug(post.id)}/`} class="block space-y-6">
+									{
+										post.data.heroImage && (
+											<div class="aspect-[16/9] overflow-hidden rounded-[24px] md:rounded-[40px] app-shadow border border-[var(--border-subtle)] relative transition-transform duration-500 group-hover:scale-[1.02]">
+												<img
+													src={post.data.heroImage}
+													alt={post.data.title}
+													class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+												/>
+											</div>
+										)
+									}
+									<div class="space-y-4 px-2">
+										<div class="flex items-center gap-4">
+											<p class="text-[10px] uppercase tracking-[0.2em] font-black text-[var(--accent-cool)]">
+												<FormattedDate date={post.data.pubDate} />
+											</p>
+											<span class="w-1 h-1 bg-[var(--border-subtle)] rounded-full"></span>
+											<p class="text-[10px] uppercase tracking-[0.2em] font-black text-[var(--text-muted)]">
+												{readingTimeMinutes(post.body ?? '')} min read
+											</p>
+										</div>
+										<h2 class="serif text-3xl md:text-4xl leading-tight text-[var(--text-main)] group-hover:text-[var(--accent-cool)] transition-colors">
+											{post.data.title}
+										</h2>
+										<p class="text-[var(--text-muted)] line-clamp-2 md:text-lg leading-relaxed">
+											{post.data.description}
+										</p>
+									</div>
+								</a>
+							</article>
+						))
+					}
+				</section>
+			)
+		}
+
+		<section class="mt-16 flex flex-wrap gap-4 items-center fade-up">
+			<a href="/blog/" class="text-sm font-semibold text-[var(--text-muted)] hover:text-[var(--text-main)] transition-colors">← All articles</a>
+			<span class="text-[var(--border-subtle)]">·</span>
+			<a href="/#features" class="text-sm font-semibold text-[var(--text-muted)] hover:text-[var(--text-main)] transition-colors">What {APP_NAME} includes</a>
+		</section>
+
+		<section class="mt-16 glass-card p-10 md:p-12 text-center fade-up">
+			<h2 class="serif text-2xl md:text-3xl mb-4 text-[var(--text-main)]">Import one clip. Export post-ready.</h2>
+			<p class="text-[var(--text-muted)] mb-8 max-w-md mx-auto">Free on Android and iOS.</p>
+			<StoreCta centered />
+		</section>
+	</main>
+</BaseLayout>

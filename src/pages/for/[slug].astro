@@ -1,0 +1,129 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import StoreCta from '../../components/StoreCta.astro';
+import { USE_CASES, getUseCaseBySlug } from '../../lib/useCases';
+import { getCategoryBySlug } from '../../lib/categories';
+import { isPublished, postSlug, postsInCategory } from '../../lib/blog';
+import { APP_NAME, SITE_URL } from '../../consts';
+
+export function getStaticPaths() {
+	return USE_CASES.map((uc) => ({ params: { slug: uc.slug } }));
+}
+
+const { slug } = Astro.params;
+const useCase = getUseCaseBySlug(slug!);
+
+if (!useCase) {
+	return Astro.redirect('/404');
+}
+
+const allPosts = await getCollection('blog');
+const relatedPosts = useCase.categorySlugs.flatMap((catSlug) =>
+	postsInCategory(allPosts, catSlug).slice(0, 2),
+);
+const uniquePosts = [...new Map(relatedPosts.map((p) => [p.id, p])).values()].slice(0, 4);
+
+const categories = useCase.categorySlugs
+	.map((s) => getCategoryBySlug(s))
+	.filter(Boolean);
+
+const siteUrl = SITE_URL;
+const pageUrl = `${siteUrl}/for/${useCase.slug}/`;
+
+const jsonLd = {
+	'@context': 'https://schema.org',
+	'@type': 'WebPage',
+	name: useCase.headline,
+	description: useCase.metaDescription,
+	url: pageUrl,
+	about: {
+		'@type': 'Thing',
+		name: useCase.headline,
+	},
+	isPartOf: { '@type': 'WebSite', name: APP_NAME, url: siteUrl },
+};
+---
+
+<BaseLayout
+	title={`${useCase.headline} | ${APP_NAME}`}
+	description={useCase.metaDescription}
+	keywords={categories.flatMap((c) => c!.keywords).join(', ')}
+>
+	<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+
+	<main class="max-w-4xl mx-auto px-6 py-12 md:py-24 relative z-10">
+		<header class="mb-12 md:mb-16 fade-up">
+			<p class="text-[var(--accent-warm)] uppercase tracking-[0.4em] text-[10px] md:text-[11px] font-black mb-4">
+				Use case
+			</p>
+			<h1 class="serif text-4xl md:text-6xl text-[var(--text-main)] mb-6 leading-tight">
+				{useCase.headline}
+			</h1>
+			<p class="text-[var(--text-muted)] text-lg md:text-xl leading-relaxed">
+				{useCase.body}
+			</p>
+		</header>
+
+		<div class="glass-card p-8 md:p-10 mb-12 fade-up space-y-4">
+			<div class="grid sm:grid-cols-2 gap-6">
+				<div>
+					<p class="text-[10px] font-bold uppercase tracking-widest text-[var(--text-muted)] mb-2">Before</p>
+					<p class="text-[var(--text-main)]">{useCase.before}</p>
+				</div>
+				<div>
+					<p class="text-[10px] font-bold uppercase tracking-widest text-[var(--accent-cool)] mb-2">After</p>
+					<p class="text-[var(--text-main)]">{useCase.after}</p>
+				</div>
+			</div>
+			{useCase.note && (
+				<p class="text-sm text-[var(--text-muted)] italic border-t border-[var(--border-subtle)] pt-4">
+					{useCase.note}
+				</p>
+			)}
+		</div>
+
+		{
+			uniquePosts.length > 0 && (
+				<section class="mb-12 fade-up">
+					<h2 class="serif text-2xl md:text-3xl text-[var(--text-main)] mb-6">Related guides</h2>
+					<ul class="space-y-4">
+						{
+							uniquePosts.map((post) => (
+								<li>
+									<a href={`/blog/${postSlug(post.id)}/`} class="block glass-card p-5 hover:border-white/15 transition-colors group">
+										<p class="font-semibold text-[var(--text-main)] group-hover:text-[var(--accent-cool)] transition-colors">{post.data.title}</p>
+										<p class="text-sm text-[var(--text-muted)] mt-1 line-clamp-2">{post.data.description}</p>
+									</a>
+								</li>
+							))
+						}
+					</ul>
+				</section>
+			)
+		}
+
+		<section class="mb-12 fade-up">
+			<h2 class="serif text-2xl md:text-3xl text-[var(--text-main)] mb-6">Related topics</h2>
+			<div class="category-chips">
+				{
+					categories.map((cat) => (
+						<a href={`/blog/category/${cat!.slug}/`} class="category-chip">
+							{cat!.title}
+						</a>
+					))
+				}
+			</div>
+		</section>
+
+		<section class="glass-card p-10 md:p-12 text-center fade-up">
+			<h2 class="serif text-2xl md:text-3xl mb-4 text-[var(--text-main)]">Try {APP_NAME}</h2>
+			<p class="text-[var(--text-muted)] mb-8 max-w-md mx-auto">Import one clip, export post-ready. Free on Android and iOS.</p>
+			<StoreCta centered />
+		</section>
+
+		<p class="text-center mt-8">
+			<a href="/#use-cases" class="text-sm text-[var(--text-muted)] hover:text-[var(--text-main)] transition-colors">← All use cases</a>
+		</p>
+	</main>
+</BaseLayout>

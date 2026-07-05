@@ -5,9 +5,9 @@ import { APP_NAME } from '../consts';
 ---
 
 <BaseLayout
-	title={`About ${APP_NAME} — AI Video Editor for Reels & Shorts`}
-	description={`${APP_NAME} is the AI video editor that turns raw phone clips into scroll-stopping Reels. Auto captions, VFX, SFX, and smart tracking — timed to your footage. Available on Android and iOS.`}
-	keywords="PopMyVideo, AI video editor, auto captions, VFX, SFX, mobile video editor, reels editor, shorts editor"
+	title={`About ${APP_NAME} — Auto Captions & Video Effects for Reels`}
+	description={`${APP_NAME} polishes one clip end-to-end — auto captions, text overlays, motion graphics, video effects, and sound timed to speech or action. Not a full editor. Not a podcast clipper. Android and iOS.`}
+	keywords="PopMyVideo, auto captions, video effects, text overlay video, mobile video, reels editor, one-clip workflow"
 >
 	<main class="max-w-3xl mx-auto px-6 py-12 md:py-24 relative z-10">
 		<header class="mb-12 md:mb-16 fade-up">
@@ -15,41 +15,49 @@ import { APP_NAME } from '../consts';
 				About {APP_NAME}
 			</p>
 			<h1 class="serif text-4xl md:text-6xl text-[var(--text-main)] mb-6 leading-tight">
-				You shoot.<br />
-				<span class="italic text-[var(--text-muted)]">AI edits.</span>
+				Your clip is filmed.<br />
+				<span class="italic text-[var(--text-muted)]">Make it post-ready.</span>
 			</h1>
 			<p class="text-[var(--text-muted)] text-lg md:text-xl leading-relaxed">
-				{APP_NAME} is the AI video editor for creators who film on their phone and post the same night. Drop your clip — get captions, VFX, and SFX timed to the action.
+				{APP_NAME} is the polish layer for creators who film on their phone and post the same night. Import one clip — get auto captions, text overlays, motion graphics, video effects, and sound timed to what's in the video.
 			</p>
 		</header>
 
 		<div class="prose max-w-none fade-up space-y-6 text-[var(--text-muted)] leading-relaxed">
 			<p>
-				<strong class="text-[var(--text-main)]">{APP_NAME}</strong> turns raw phone clips into scroll-stopping Reels and Shorts. Upload any clip and AI layers animated text, icons, shapes, and effects on top — timed to what's happening in your footage.
+				<strong class="text-[var(--text-main)]">{APP_NAME}</strong> adds animated overlays on top of your original footage — captions synced to speech, stat cards on key claims, bursts on the action, impacts on silent B-roll. Your pixels are never regenerated or restyled.
 			</p>
 
 			<p>
-				Most phone footage looks fine — but fine doesn't stop the scroll. We built {APP_NAME} for creators who want their clips to look finished without spending hours in an editor: auto captions, arrows, sparkle when something lands, and sound effects when the clip needs punch.
+				Most phone clips look fine — but fine doesn't hold attention on mute. We built {APP_NAME} for the step after filming: one clip in, timed polish out, export a finished Reel, Short, or ad in minutes. No multi-track timeline.
 			</p>
 
 			<p>
-				AI reads your shot (and listens if there's audio), finds the right moments, and adds moving graphics on top. Your original video is never remade — we don't restyle or regenerate your pixels. You import, prompt the vibe, preview versions, and export a polished MP4 from your phone.
+				The app reads visuals and listens when there's audio, finds moments worth enhancing, and layers moving graphics and sound on top. You import, preview versions, regenerate any moment with a prompt, and export MP4 from your phone.
 			</p>
 
-			<h2 class="serif text-2xl md:text-3xl text-[var(--text-main)] !mt-12 !mb-4">Privacy by design</h2>
+			<h2 class="serif text-2xl md:text-3xl text-[var(--text-main)] !mt-12 !mb-4">What it's not</h2>
 			<p>
-				Your full video file stays on your device. To generate effects, we send compressed storyboard frames and audio from the selected section — not your entire library. Processing data is deleted after the job completes.
+				Not a podcast clipper — bring the short clip you've already cut; we add captions and retention graphics. Not a full editor like CapCut or Descript — no timeline maze, no long-form transcript edit. Not AI video generation — your footage stays yours.
+			</p>
+
+			<h2 class="serif text-2xl md:text-3xl text-[var(--text-main)] !mt-12 !mb-4">Privacy</h2>
+			<p>
+				We don't re-encode your clip in the cloud. AI returns animation code — captions, graphics, and effects as a lightweight spec — and your phone composites it onto your footage locally. To build that spec, we send compressed frames and audio to third-party AI services; that data is deleted as soon as the job finishes. No project cloud sync.
+			</p>
+			<p class="text-sm">
+				Internet required for AI features. Free account (email sign-in). <a href="/privacy/">Privacy Policy</a>
 			</p>
 
 			<h2 class="serif text-2xl md:text-3xl text-[var(--text-main)] !mt-12 !mb-4">Where we are today</h2>
 			<p>
-				{APP_NAME} is live on Android and iOS. We publish practical guides on our <a href="/blog/">blog</a> for creators who want Reels and short-form video to stand out without a steep learning curve.
+				{APP_NAME} is live on Android and iOS. We publish practical guides on our <a href="/blog/">blog</a> for silent B-roll, podcast clips, talking-head video, and Reels polish.
 			</p>
 		</div>
 
 		<section class="mt-16 glass-card p-10 md:p-12 text-center">
 			<h2 class="serif text-3xl mb-4 text-[var(--text-main)]">Try {APP_NAME} on your next clip</h2>
-			<p class="text-[var(--text-muted)] mb-8 max-w-md mx-auto">Download on Android or iOS — polish a clip in minutes, not hours.</p>
+			<p class="text-[var(--text-muted)] mb-8 max-w-md mx-auto">Download on Android or iOS — import one clip, export post-ready.</p>
 			<StoreCta centered />
 		</section>
 	</main>

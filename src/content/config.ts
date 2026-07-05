@@ -1,4 +1,5 @@
 import { defineCollection, z } from 'astro:content';
+import { CATEGORY_SLUGS } from '../lib/categories';
 
 const blog = defineCollection({
 	type: 'content',
@@ -10,6 +11,7 @@ const blog = defineCollection({
 			pubDate: z.coerce.date(),
 			updatedDate: z.coerce.date().optional(),
 			heroImage: z.string().optional(),
+			categories: z.array(z.enum(CATEGORY_SLUGS)).min(1).max(2),
 			tags: z.array(z.string()).optional(),
 			draft: z.boolean().default(false),
 		}),
