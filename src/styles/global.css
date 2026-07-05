@@ -303,11 +303,19 @@ body {
     margin-inline: auto;
 }
 
+.store-cta--start {
+    align-items: flex-start;
+}
+
 @media (min-width: 480px) {
     .store-cta {
         flex-direction: row;
         flex-wrap: wrap;
         justify-content: center;
+    }
+
+    .store-cta--start {
+        justify-content: flex-start;
     }
 }
 

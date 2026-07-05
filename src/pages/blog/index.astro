@@ -2,8 +2,9 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import FormattedDate from '../../components/FormattedDate.astro';
+import StoreCta from '../../components/StoreCta.astro';
 import { isPublished, postSlug, readingTimeMinutes } from '../../lib/blog';
-import { PLAY_STORE_URL, APP_NAME, SITE_URL } from '../../consts';
+import { APP_NAME, SITE_URL } from '../../consts';
 
 const posts = (await getCollection('blog'))
 	.filter(isPublished)
@@ -114,16 +115,9 @@ const jsonLd = {
 				Skip the <span class="italic gradient-text">timeline</span>.
 			</h2>
 			<p class="text-[var(--text-muted)] text-lg md:text-xl max-w-xl mx-auto mb-10">
-				{APP_NAME} finds the beat in your footage and layers captions and effects on top. Free on Android.
+				{APP_NAME} finds the beat in your footage and layers captions and effects on top. Free on Android and iOS.
 			</p>
-			<a 
-				href={PLAY_STORE_URL}
-				target="_blank"
-				rel="noopener noreferrer"
-				class="inline-block cta-primary font-black px-10 py-5 rounded-2xl md:rounded-3xl active:scale-95 text-[10px] uppercase tracking-[0.2em] cta-glow"
-			>
-				Download on Google Play
-			</a>
+			<StoreCta centered />
 		</section>
 	</main>
 </BaseLayout>

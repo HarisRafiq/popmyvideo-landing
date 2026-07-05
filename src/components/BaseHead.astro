@@ -38,6 +38,20 @@ const ogImage = new URL(image, Astro.site);
 	function gtag(){dataLayer.push(arguments);}
 	gtag('js', new Date());
 	gtag('config', 'G-S38C687J17');
+	gtag('config', 'AW-964277789');
+
+	function gtag_report_conversion(url) {
+		var callback = function () {
+			if (typeof(url) != 'undefined') {
+				window.open(url, '_blank', 'noopener,noreferrer');
+			}
+		};
+		gtag('event', 'conversion', {
+			'send_to': 'AW-964277789/tGlLCNuW_IIDEJ3s5ssD',
+			'event_callback': callback
+		});
+		return false;
+	}
 </script>
 
 <!-- Global Metadata -->

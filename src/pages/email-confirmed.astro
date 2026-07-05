@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import StoreCta from '../components/StoreCta.astro';
 import { APP_NAME, PLAY_STORE_URL, APP_LAUNCH_INTENT_URL } from '../consts';
 
 const steps = [
@@ -51,7 +52,7 @@ const steps = [
 						<span class="text-[var(--text-main)] font-semibold"> Head back to the app</span> to sign in and wrap up onboarding so you can start enhancing your clips.
 					</p>
 
-					<div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-center lg:justify-start gap-4 mb-6">
+					<div class="flex flex-col items-center lg:items-start gap-4 mb-6">
 						<a
 							id="open-app"
 							href={APP_LAUNCH_INTENT_URL}
@@ -64,14 +65,7 @@ const steps = [
 							</svg>
 							Open {APP_NAME}
 						</a>
-						<a
-							href={PLAY_STORE_URL}
-							target="_blank"
-							rel="noopener noreferrer"
-							class="inline-flex items-center justify-center gap-2 px-6 py-4 rounded-2xl border border-[var(--border-subtle)] text-[var(--text-muted)] font-black text-[10px] uppercase tracking-[0.2em] hover:bg-white/5 transition-colors w-full sm:w-auto"
-						>
-							Get it on Google Play
-						</a>
+						<StoreCta />
 					</div>
 
 					<p class="text-[9px] md:text-[10px] font-black text-[var(--text-muted)] uppercase tracking-widest max-w-md mx-auto lg:mx-0">

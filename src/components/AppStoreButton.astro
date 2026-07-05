@@ -17,6 +17,7 @@ const width = Math.round(height * (135 / 40));
 	target="_blank"
 	rel="noopener noreferrer"
 	class:list={['store-badge', size === 'nav' && 'store-badge--nav', className]}
+	onclick={`return gtag_report_conversion('${APP_STORE_URL}');`}
 >
 	<img
 		src="/badges/app-store.svg"

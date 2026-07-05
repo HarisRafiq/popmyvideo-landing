@@ -17,6 +17,7 @@ const width = Math.round(height * (180 / 53.333));
 	target="_blank"
 	rel="noopener noreferrer"
 	class:list={['store-badge', size === 'nav' && 'store-badge--nav', className]}
+	onclick={`return gtag_report_conversion('${PLAY_STORE_URL}');`}
 >
 	<img
 		src="/badges/google-play.svg"
