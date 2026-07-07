@@ -29,7 +29,7 @@ export const BRAND = {
 export const ANDROID_PACKAGE_ID = 'com.thinkingcats.catcut';
 export const IOS_BUNDLE_ID = 'com.thinkingcats.catcut';
 export const PLAY_STORE_URL = `https://play.google.com/store/apps/details?id=${ANDROID_PACKAGE_ID}`;
-export const APP_STORE_URL = 'https://apps.apple.com/pk/app/popmyvideo-ai-video-booster/id6780106608';
+export const APP_STORE_URL = 'https://apps.apple.com/app/popmyvideo-ai-video-booster/id6780106608';
 
 /** Opens the installed app on Android; falls back to Play Store in the browser. */
 export const APP_LAUNCH_INTENT_URL = `intent://#Intent;package=${ANDROID_PACKAGE_ID};action=android.intent.action.MAIN;category=android.intent.category.LAUNCHER;S.browser_fallback_url=${encodeURIComponent(PLAY_STORE_URL)};end`;
