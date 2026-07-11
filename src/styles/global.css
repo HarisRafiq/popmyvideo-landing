@@ -794,7 +794,8 @@ body {
     position: relative;
     cursor: ew-resize;
     user-select: none;
-    touch-action: none;
+    /* Allow vertical page scroll; keep horizontal gestures for the slider */
+    touch-action: pan-y;
 }
 
 .before-after-slider__img {
@@ -820,6 +821,7 @@ body {
     align-items: center;
     pointer-events: auto;
     cursor: ew-resize;
+    touch-action: pan-y;
 }
 
 .before-after-slider__handle-line {

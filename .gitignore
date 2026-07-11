@@ -22,3 +22,9 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# keyword research outputs (may include Ads CSV exports)
+research/*.csv
+research/*.json
+research/*.md
+!research/.gitkeep

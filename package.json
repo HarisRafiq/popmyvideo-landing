@@ -9,7 +9,8 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "keywords": "node scripts/keyword-research.mjs"
   },
   "dependencies": {
     "@astrojs/mdx": "^3.1.9",
