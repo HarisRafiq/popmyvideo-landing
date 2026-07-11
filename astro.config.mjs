@@ -5,6 +5,8 @@ import { defineConfig } from 'astro/config';
 import tailwind from '@astrojs/tailwind';
 import { buildBlogLastmodMap } from './scripts/sitemap-dates.mjs';
 
+import cloudflare from "@astrojs/cloudflare";
+
 const site = 'https://popmyvideo.com';
 const blogLastmod = buildBlogLastmodMap(site);
 
@@ -12,6 +14,7 @@ const blogLastmod = buildBlogLastmodMap(site);
 export default defineConfig({
   site,
   trailingSlash: 'always',
+
   integrations: [
     mdx(),
     sitemap({
@@ -41,4 +44,7 @@ export default defineConfig({
     }),
     tailwind(),
   ],
+
+  output: "hybrid",
+  adapter: cloudflare()
 });
